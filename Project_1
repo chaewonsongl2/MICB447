@@ -1,4 +1,89 @@
 #Project_1
 #dog dataset analysis using QIIME2
 
-#
+#Performed on file path: /data/dogdata/CS
+
+#Import data using Manifest (Manifest: direction on how to compile data) --> creates demux.qza
+qiime tools import \
+--type 'SampleData[SequencesWithQuality]' \
+--input-path /mnt/datasets/project_2/dog/dog_manifest.txt \
+--input-format SingleEndFastqManifestPhred33V2 \
+--output-path demux.qza
+
+#Create visualization of demultiplexed samples --> creates demux.qzv
+qiime demux summarize \
+--i-data demux.qza \
+--o-visualization demux.qzv
+
+#Sequence quality control with DADA2 --> creates rep-seqs-dada2.qza, table-dada2.qza, stats-dada2.qza
+qiime dada2 denoise-single \
+--i-demultiplexed-seqs demux.qza \
+--p-trim-left 0 \
+--p-trunc-len 99 \
+--o-representative-sequences rep-seqs-dada2.qza \
+--o-table table-dada2.qza \
+--o-denoising-stats stats-dada2.qza
+
+#Create visualization of DADA2 stats --> creates stats.qzv
+qiime metadata tabulate \
+--m-input-file stats-dada2.qza \
+--o-visualization stats.qzv
+
+#Generating a features table --> generate table.qzv
+qiime feature-table summarize \
+--i-table table-dada2.qza \
+--o-visualization table.qzv \
+--m-sample-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt
+
+#Visualizae ASVs stats --> create rep-seqs.qzv
+qiime feature-table tabulate-seqs \
+--i-data rep-seqs-dada2.qza \
+--o-visualization rep-seqs.qzv
+
+#Taxonomic analysis (assigning taxonomy) --> create taxonomy.qza
+qiime feature-classifier classify-sklearn \
+--i-classifier /mnt/datasets/classifiers/silva-138-99-515-806-nb-classifier.qza \
+--i-reads rep-seqs-dada2.qza \
+--o-classification taxonomy.qza
+
+#Visualize taxonomy --> create taxonomy.qzv
+qiime metadata tabulate \
+--m-input-file taxonomy.qza \
+--o-visualization taxonomy.qzv
+
+#Taxonomy bar plots --> create taxa-bar-plots.qzv
+qiime taxa barplot \
+--i-table table-dada2.qza \
+--i-taxonomy taxonomy.qza \
+--m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
+--o-visualization taxa-bar-plots.qzv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
