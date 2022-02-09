@@ -58,8 +58,21 @@ qiime taxa barplot \
 --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
 --o-visualization taxa-bar-plots.qzv
 
+#Phylogenetic diversity analysis --> create aligned-rep-seqs.qza, masked-aligned-rep-seqs.qza, unrooted-tree.qza, rooted-tree.qza
+qiime phylogeny align-to-tree-mafft-fasttree \
+--i-sequences rep-seqs-dada2.qza \
+--o-alignment aligned-rep-seqs.qza \
+--o-masked-alignment masked-aligned-rep-seqs.qza \
+--o-tree unrooted-tree.qza \
+--o-rooted-tree rooted-tree.qza
 
-
+#Alpha rarefaction curve, set max depth according to table.qzv --> create alpha-rarefaction.qzv
+qiime diversity alpha-rarefaction \
+--i-table table-dada2.qza \
+--i-phylogeny rooted-tree.qza \
+--p-max-depth 128 \
+--m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
+--o-visualization alpha-rarefaction.qzv
 
 
 
