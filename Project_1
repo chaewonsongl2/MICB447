@@ -74,10 +74,19 @@ qiime diversity alpha-rarefaction \
 --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
 --o-visualization alpha-rarefaction.qzv
 
-
-
-
-
+#Running diversity alpha and beta diversity metrics --> core-metrics-results
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table table-no-mitochondria-no-chloroplast.qza \
+  --p-sampling-depth 138 \
+  --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
+  --output-dir core-metrics-results
+ 
+#Running alpha diversity metrics to be analyzed --> within core-metrics-results
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/faith_pd_vector.qza \
+  --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
+  --o-visualization core-metrics-results/faith-pd-group-significance.qzv
 
 
 
