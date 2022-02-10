@@ -88,7 +88,13 @@ qiime diversity alpha-group-significance \
   --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
   --o-visualization core-metrics-results/faith-pd-group-significance.qzv
 
-
+#Running beta diversity metrics to be analyzed --> within core-metrics-results
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
+  --m-metadata-column country \
+  --o-visualization core-metrics-results/unweighted-unifrac-subject-group-significance.qzv \
+  --p-pairwise
 
 
 
