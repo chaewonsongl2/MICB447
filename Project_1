@@ -70,7 +70,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 qiime diversity alpha-rarefaction \
 --i-table table-dada2.qza \
 --i-phylogeny rooted-tree.qza \
---p-max-depth 128 \
+--p-max-depth 3000 \
 --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
 --o-visualization alpha-rarefaction.qzv
 
