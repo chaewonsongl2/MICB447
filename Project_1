@@ -70,7 +70,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 qiime diversity alpha-rarefaction \
 --i-table table-dada2.qza \
 --i-phylogeny rooted-tree.qza \
---p-max-depth 3000 \
+--p-max-depth 18068 \
 --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
 --o-visualization alpha-rarefaction.qzv
 
@@ -78,7 +78,7 @@ qiime diversity alpha-rarefaction \
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny rooted-tree.qza \
   --i-table table-no-mitochondria-no-chloroplast.qza \
-  --p-sampling-depth 18068 \
+  --p-sampling-depth 3000 \
   --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
   --output-dir core-metrics-results
  
