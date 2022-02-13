@@ -58,6 +58,13 @@ qiime taxa barplot \
 --m-metadata-file /mnt/datasets/project_2/dog/dog_metadata.txt \
 --o-visualization taxa-bar-plots.qzv
 
+#Taxonomy based filtering --> create table-no-mitochondria-no-chloroplast.qza
+qiime taxa filter-table \
+  --i-table table-dada2.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-table table-no-mitochondria-no-chloroplast.qza
+  
 #Phylogenetic diversity analysis --> create aligned-rep-seqs.qza, masked-aligned-rep-seqs.qza, unrooted-tree.qza, rooted-tree.qza
 qiime phylogeny align-to-tree-mafft-fasttree \
 --i-sequences rep-seqs-dada2.qza \
