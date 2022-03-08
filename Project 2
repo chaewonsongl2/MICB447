@@ -1,6 +1,12 @@
 #HISEAS
 
-#Import hiseas data using manifest to location: /data/hiseas
+#make detached screen of team server
+screen -S hiseas_demux
+
+#load qiime2 on detached screen
+conda activate qiime2-2021.11
+
+#Import hiseas data using manifest TO /data/hiseas
 qiime tools import \
 --type 'SampleData[SequencesWithQuality]' \
 --input-path /mnt/datasets/project_2/hiseas/hiseas_manifest.txt \
