@@ -1,10 +1,11 @@
 #HISEAS
-(CODE FOR GENERATING DEMUX FILE GOES HERE)
 
-#Visualizing demux.qza file
-qiime demux summarize \
-  --i-data hiseas_demux.qza \
-  --o-visualization hiseas_demux.qzv
+#Import hiseas data using manifest to location: /data/hiseas
+qiime tools import \
+--type 'SampleData[SequencesWithQuality]' \
+--input-path /mnt/datasets/project_2/hiseas/hiseas_manifest.txt \
+--input-format SingleEndFastqManifestPhred33V2 \
+--output-path hiseas_demux.qza
 
 # Determine ASVs with DADA2
 qiime dada2 denoise-single \
