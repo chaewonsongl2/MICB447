@@ -36,7 +36,7 @@ qiime metadata tabulate \
 qiime feature-table summarize \
   --i-table hiseas_table.qza \
   --o-visualization hiseas_table.qzv \
-  --m-sample-metadata-file /mnt/datasets/project_2/hiseas/sample-metadata.tsv
+  --m-sample-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt
   
 qiime feature-table tabulate-seqs \
   --i-data hiseas_rep-seqs.qza \
