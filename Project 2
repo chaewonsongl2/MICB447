@@ -31,12 +31,19 @@ qiime dada2 denoise-single \
 qiime metadata tabulate \
   --m-input-file hiseas_stats.qza \
   --o-visualization hiseas_stats.qzv
+  
+# Metadata-based filtering
+qiime feature-table filter-samples \
+--i-table hiseas_table.qza \
+--m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+--p-where "[collection_device]='swab'" \
+--o-filtered-table swab-filtered_hiseas_table.qza
 
 # Visualize ASVs stats
 qiime feature-table summarize \
-  --i-table hiseas_table.qza \
-  --o-visualization hiseas_table.qzv \
-  --m-sample-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt
+--i-table swab-filtered_hiseas_table.qza \
+--o-visualization swab-filtered_hiseas_table.qzv \
+--m-sample-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt
   
 qiime feature-table tabulate-seqs \
   --i-data hiseas_rep-seqs.qza \
