@@ -132,3 +132,6 @@ qiime diversity beta-group-significance \
   --m-metadata-column description \
   --o-visualization hiseas_core-metrics-results-2/unweighted-unifrac-description-group-significance.qzv \
   --p-pairwise
+
+qiime PCoA plot generation
+ 
