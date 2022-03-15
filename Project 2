@@ -48,3 +48,51 @@ qiime feature-table summarize \
 qiime feature-table tabulate-seqs \
   --i-data hiseas_rep-seqs.qza \
   --o-visualization hiseas_rep-seqs.qzv
+
+# Taxonomic analysis
+qiime feature-classifier classify-sklearn \
+  --i-classifier /mnt/datasets/classifiers/silva-138-99-515-806-nb-classifier.qza \
+  --i-reads hiseas_rep-seqs.qza \
+  --o-classification hiseas_taxonomy.qza
+
+qiime metadata tabulate \
+  --m-input-file hiseas_taxonomy.qza \
+  --o-visualization hiseas_taxonomy.qzv
+  
+# Taxonomy barplots
+qiime taxa barplot \
+  --i-table swab-filtered_hiseas_table.qza \
+  --i-taxonomy hiseas_taxonomy.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --o-visualization hiseas_taxa-bar-plots.qzv
+
+# Taxonomy-based filtering for mitochondria and chloroplast
+qiime taxa filter-table \
+  --i-table swab-filtered_hiseas_table.qza \
+  --i-taxonomy hiseas_taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-table hiseas_table-no-mi-ch.qza
+  
+  # Generate a tree for phylogenetic diversity analyses
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences hiseas_rep-seqs.qza \
+  --o-alignment hiseas_aligned-rep-seqs.qza \
+  --o-masked-alignment hiseas_masked-aligned-rep-seqs.qza \
+  --o-tree hiseas_unrooted-tree.qza \
+  --o-rooted-tree hiseas_rooted-tree.qza
+
+# Alpha rarefaction curve
+qiime diversity alpha-rarefaction \
+--i-table hiseas_table-no-mi-ch.qza \
+--i-phylogeny hiseas_rooted-tree.qza \
+--p-max-depth 18000 \
+--m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+--o-visualization alpha-rarefaction.qzv
+
+# Calculate alpha- and beta-diversity metrics
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny hiseas_rooted-tree.qza \
+  --i-table hiseas_table-no-mi-ch.qza \
+  --p-sampling-depth 3454\
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --output-dir hiseas_core-metrics-results
