@@ -1,1 +1,3 @@
-
+#Plot PCoA Beta diversity
+#Read in the Unweighted Unifrac
+uwunifrac<-read_qza(here::here("QIIME2 files","unweighted_unifrac_pcoa_results.qza"))
