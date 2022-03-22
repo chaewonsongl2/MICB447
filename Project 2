@@ -32,6 +32,14 @@ qiime metadata tabulate \
   --m-input-file hiseas_stats.qza \
   --o-visualization hiseas_stats.qzv
   
+### FILTER THE DATASET
+
+# Filter to remove rare ASV's accounting for less than 0.005% of total reads
+qiime feature-table filter-features \
+  --i-table hiseas.qza \
+  --p-min-frequency 590 \
+  --o-filtered-table frequency-filtered-table.qza  
+  
 # Metadata-based filtering
 qiime feature-table filter-samples \
 --i-table hiseas_table.qza \
