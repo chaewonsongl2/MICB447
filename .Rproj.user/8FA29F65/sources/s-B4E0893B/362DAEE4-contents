@@ -1,0 +1,23 @@
+#### R SCRIPT - HISEAS DATASET - PCoA PLOT
+
+# Load CRAN packages
+library(tidyverse)
+library(vegan)
+library(ape)
+
+# Load Bioconductor packages
+library(phyloseq)
+
+# Load additional ggplot packages
+library(ggplot2)
+library(ggthemes)
+
+# Define the set of random numbers
+set.seed(800)
+
+# Define name of metadata file
+metadata_file <- "hiseas_metadata.txt"
+
+#Plot PCoA Beta diversity
+#Read in the Unweighted Unifrac
+uwunifrac<-read_qza(here::here("QIIME2 files","unweighted_unifrac_pcoa_results.qza"))

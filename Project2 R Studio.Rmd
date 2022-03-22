@@ -1,0 +1,22 @@
+```{r}
+#### R SCRIPT - HISEAS DATASET - ALPHA DIVERSITY PLOTS
+
+# Load CRAN packages
+library(tidyverse)
+library(vegan)
+library(ape)
+
+# Load Bioconductor packages
+library(phyloseq)
+
+# Load additional ggplot packages
+library(ggplot2)
+library(ggthemes)
+
+# Define the set of random numbers
+set.seed(800)
+
+# Define name of metadata file
+metadata_file <- "hiseas_metadata.txt"
+```
+
