@@ -131,7 +131,7 @@ abundant_plastic_genera
 
 sample_data(abundant_plastic_genera)$orig_env_material <-
   factor(sample_data(abundant_plastic_genera)$orig_env_material,
-         levels = c("matcontrol", "plastic"))
+         levels = c("wood", "plastic"))
 ```
 
 ```{r}
@@ -238,36 +238,15 @@ deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
 plastic_diff_abund <- results(deseq_plastic)
 ```
 
-
-
-
-
-
-
-```{r PCoA Plot}
-ord <- ordinate(physeq_rar, method = "PCoA", distance = "wunifrac")
-
-
-plot_ordination(physeq_rar,
-                ord,
-                color = "orig_env_material")
-  # Define title of plot
-  labs(title = "PCoA (weighted UniFrac)") +
-  theme_bw()
-  stat_ellipse(type = "norm", size = 10)
-
-```
-
 ```{r}
 ord <- ordinate(physeq, method = "PCoA", distance = "wunifrac")
 
-
 plot_ordination(physeq,
                 ord,
-                color = "orig_env_material")
+                color = "orig_env_material")+
   # Define title of plot
   labs(title = "PCoA (weighted UniFrac)") +
-  theme_bw()
-  stat_ellipse(type = "norm", size = 10)
+  theme_bw()+
+  stat_ellipse(type = "norm", size = 0.5)
 ```
 
