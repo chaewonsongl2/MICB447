@@ -167,5 +167,5 @@ qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results-3/unweighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --m-metadata-column description \
-  --o-visualization hiseas_core-metrics-results-2/unweighted-unifrac-description-group-significance.qzv \
+  --o-visualization hiseas_core-metrics-results-3/unweighted-unifrac-description-group-significance.qzv \
   --p-pairwise
