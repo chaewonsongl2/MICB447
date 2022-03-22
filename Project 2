@@ -133,5 +133,39 @@ qiime diversity beta-group-significance \
   --o-visualization hiseas_core-metrics-results-2/unweighted-unifrac-description-group-significance.qzv \
   --p-pairwise
 
-qiime PCoA plot generation
- 
+# Cut off at 5500 - exclude water and sampling equipment controls
+
+# Calculate alpha- and beta-diversity metrics
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny hiseas_rooted-tree.qza \
+  --i-table hiseas_table-no-mi-ch.qza \
+  --p-sampling-depth 5500 \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --output-dir hiseas_core-metrics-results-3
+#chosen sampling depth 5500
+
+# Calculate alpha-group-significance
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity hiseas_core-metrics-results-3/faith_pd_vector.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --o-visualization hiseas_core-metrics-results-3/faith-pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity hiseas_core-metrics-results-3/evenness_vector.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --o-visualization hiseas_core-metrics-results-2/evenness-group-significance.qzv
+
+# Calculate beta-group-significance for orig_env_material
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results-3/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column orig_env_material \
+  --o-visualization hiseas_core-metrics-results-3/unweighted-unifrac-orig_env_material-significance.qzv \
+  --p-pairwise
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results-3/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column description \
+  --o-visualization hiseas_core-metrics-results-2/unweighted-unifrac-description-group-significance.qzv \
+  --p-pairwise
