@@ -85,150 +85,6 @@ species
 ```
 
 ```{r}
-# Step 2
-featurecontrol <- subset_samples(physeq, feature == "molecularly controls")
-
-# Step 5
-featurecontrol_counts <- taxa_sums(featurecontrol)
-relative_abundance_featurecontrol <- calculate_relative_abundance(featurecontrol_counts)
-abundant_featurecontrol <- relative_abundance_featurecontrol > 0.0005
-abundant_featurecontrol_taxa <- prune_taxa(abundant_featurecontrol, featurecontrol)
-
-# Step 6
-abundant_featurecontrol_genera <- tax_glom(abundant_featurecontrol_taxa, taxrank = "Genus")
-abundant_featurecontrol_genera
-```
-
-```{r}
-# Step 2
-matcontrol <- subset_samples(physeq, orig_env_material == "water")
-
-# Step 5
-matcontrol_counts <- taxa_sums(matcontrol)
-relative_abundance_matcontrol <- calculate_relative_abundance(matcontrol_counts)
-abundant_matcontrol <- relative_abundance_matcontrol > 0.0005
-abundant_matcontrol_taxa <- prune_taxa(abundant_matcontrol, matcontrol)
-
-# Step 6
-abundant_matcontrol_genera <- tax_glom(abundant_matcontrol_taxa, taxrank = "Genus")
-abundant_matcontrol_genera
-```
-
-```{r}
-# Step 2
-plastic <- subset_samples(physeq, orig_env_material == "plastic")
-
-# Step 5
-plastic_counts <- taxa_sums(plastic)
-relative_abundance_plastic <- calculate_relative_abundance(plastic_counts)
-abundant_plastic <- relative_abundance_plastic > 0.0005
-abundant_plastic_taxa <- prune_taxa(abundant_plastic, plastic)
-
-# Step 6
-abundant_plastic_genera <- tax_glom(abundant_plastic_taxa, taxrank = "Genus")
-abundant_plastic_genera
-
-sample_data(abundant_plastic_genera)$orig_env_material <-
-  factor(sample_data(abundant_plastic_genera)$orig_env_material,
-         levels = c("wood", "plastic"))
-```
-
-```{r}
-# Step 2
-wood <- subset_samples(physeq, orig_env_material == "wood")
-
-# Step 5
-wood_counts <- taxa_sums(wood)
-relative_abundance_wood <- calculate_relative_abundance(wood_counts)
-abundant_wood <- relative_abundance_wood > 0.0005
-abundant_wood_taxa <- prune_taxa(abundant_wood, wood)
-
-# Step 6
-abundant_wood_genera <- tax_glom(abundant_wood_taxa, taxrank = "Genus")
-abundant_wood_genera
-
-sample_data(abundant_wood_genera)$orig_env_material <-
-  factor(sample_data(abundant_wood_genera)$orig_env_material,
-         levels = c("matcontrol", "wood"))
-```
-
-```{r}
-# Step 2
-kitchen <- subset_samples(physeq, feature == "indoor kitchen")
-
-# Step 5
-kitchen_counts <- taxa_sums(kitchen)
-relative_abundance_kitchen <- calculate_relative_abundance(kitchen_counts)
-abundant_kitchen <- relative_abundance_kitchen > 0.0005
-abundant_kitchen_taxa <- prune_taxa(abundant_kitchen, kitchen)
-
-# Step 6
-abundant_kitchen_genera <- tax_glom(abundant_kitchen_taxa, taxrank = "Genus")
-abundant_kitchen_genera
-
-sample_data(abundant_kitchen_genera)$feature <-
-  factor(sample_data(abundant_kitchen_genera)$feature,
-         levels = c("featurecontrol", "kitchen"))
-```
-
-```{r}
-# Step 2
-bed <- subset_samples(physeq, feature == "bed base")
-
-# Step 5
-bed_counts <- taxa_sums(bed)
-relative_abundance_bed <- calculate_relative_abundance(bed_counts)
-abundant_bed <- relative_abundance_bed > 0.0005
-abundant_bed_taxa <- prune_taxa(abundant_bed, bed)
-
-# Step 6
-abundant_bed_genera <- tax_glom(abundant_bed_taxa, taxrank = "Genus")
-abundant_bed_genera
-
-sample_data(abundant_bed_genera)$feature <-
-  factor(sample_data(abundant_bed_genera)$feature,
-         levels = c("featurecontrol", "bed"))
-```
-
-```{r}
-# Step 2
-livingroom <- subset_samples(physeq, feature == "living room")
-
-# Step 5
-livingroom_counts <- taxa_sums(livingroom)
-relative_abundance_livingroom <- calculate_relative_abundance(livingroom_counts)
-abundant_livingroom <- relative_abundance_livingroom > 0.0005
-abundant_livingroom_taxa <- prune_taxa(abundant_livingroom, livingroom)
-
-# Step 6
-abundant_livingroom_genera <- tax_glom(abundant_livingroom_taxa, taxrank = "Genus")
-abundant_livingroom_genera
-
-sample_data(abundant_livingroom_genera)$feature <-
-  factor(sample_data(abundant_livingroom_genera)$feature,
-         levels = c("featurecontrol", "living"))
-```
-
-```{r}
-# Step 2
-toilet <- subset_samples(physeq, feature == "composting toilet")
-
-# Step 5
-toilet_counts <- taxa_sums(toilet)
-relative_abundance_toilet <- calculate_relative_abundance(toilet_counts)
-abundant_toilet <- relative_abundance_toilet > 0.0005
-abundant_toilet_taxa <- prune_taxa(abundant_toilet, toilet)
-
-# Step 6
-abundant_toilet_genera <- tax_glom(abundant_toilet_taxa, taxrank = "Genus")
-abundant_toilet_genera
-
-sample_data(abundant_toilet_genera)$feature <-
-  factor(sample_data(abundant_toilet_genera)$feature,
-         levels = c("featurecontrol", "toilet"))
-```
-
-```{r}
 deseq_plastic <- phyloseq_to_deseq2(abundant_plastic_genera, ~ orig_env_material)
 geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
 deseq_plastic <- estimateSizeFactors(deseq_plastic, geoMeans = geo_means)
@@ -282,5 +138,84 @@ library(rgexf)
 library(htmlwidgets)
 ```
 ```{r}
+## set.seed is used to fix the random number generation to make the results repeatable
+set.seed(800)
+theme_set(theme_bw(base_size=18))
+calculate_relative_abundance <- function(x) x/sum(x)
 ```
+
+```{r}
+#Import qza artifacts to microeco
+(meco_data<-qiime2meco(
+    ASV_data=here::here("hiseas-table.qza"),
+    phylo_tree=here::here("hiseas-rooted-tree.qza"),
+    taxonomy_data=here::here("hiseas-taxonomy.qza",
+    sample_data = here::here("hiseas_metadata.txt"))))
+```
+```{r}
+head(meco_data$otu_table)
+meco_data$sample_table
+head(meco_data$tax_table)
+#Create a dummy copy of our dataset
+(dataset <- clone(meco_data))
+```
+
+```{r}
+#Data processing 
+dataset$sample_sums()
+```
+```{r}
+#Filter by metadata
+#Filter the samples to only include surface samples
+dataset$sample_table <- dataset$sample_table %>% filter(`collection_device` == "swab")
+dataset$tidy_dataset()
+#Rarefy filtered data
+dataset$rarefy_samples(sample.size = 1000)
+```
+
+```{r Relative Abundance}
+#Calculate relative abundance
+dataset$cal_abund(rel=T)
+typeof(dataset$taxa_abund)
+names(dataset$taxa_abund)
+dataset$taxa_abund$Class [1:5,1:5]
+```
+```{r Removing Low Abundant Features}
+#Removing low abundant features
+total_counts <- dataset$taxa_sums()
+relative_abundance <- calculate_relative_abundance(total_counts)
+#filter out low abundant features
+abundant <- relative_abundance > 0.0005 
+dataset$tidy_dataset()
+```
+```{r Taxonomic Level}
+#extract relative abundance information on Genera
+genera_RA <- dataset$taxa_abund$Genus %>% as_tibble(rownames = "Feature_Taxonomy")
+
+#Only a snippet shown
+head(genera_RA)
+genera_RA <- genera_RA %>% pivot_longer(-Feature_Taxonomy, values_to = "Relative_Abundance", names_to = "SampleID")
+
+#Now we can join this with the metadata and plot
+genera_RA <- genera_RA %>% left_join(dataset$sample_table)
+
+#Split up feature taxonomy
+genera_RA <- genera_RA %>% separate(Feature_Taxonomy, into = c("k","p","c","o","f","g"), sep = "\\|")
+ggplot(filter(genera_RA, g =="g__Akkermansia"), aes(x=subject, y = Relative_Abundance)) +
+  geom_boxplot()
+```
+
+
+```{R Abundance Plots}
+#Creating a Venn Diagram comparing wood and plastic
+surface_venn_dataset<- meco_data$merge_samples(use_group = "orig_env_material")
+surface_venn_dataset
+# create trans_venn object
+t1 <- trans_venn$new(surface_venn_dataset, ratio = "numratio")
+```
+
+```{r}
+
+```
+
 
