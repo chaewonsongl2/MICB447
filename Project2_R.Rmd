@@ -248,5 +248,7 @@ plot_ordination(physeq,
   labs(title = "PCoA (weighted UniFrac)") +
   theme_bw()+
   stat_ellipse(type = "norm", size = 0.5)
+
+# Run PERMANOVA
 ```
 
