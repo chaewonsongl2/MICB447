@@ -164,10 +164,10 @@ calculate_relative_abundance <- function(x) x/sum(x)
 ```{r Import Microeco}
 #Import qza artifacts to microeco
 (meco_data<-qiime2meco(
-    ASV_data=here::here("hiseas-table.qza"),
-    phylo_tree=here::here("hiseas-rooted-tree.qza"),
-    taxonomy_data=here::here("hiseas-taxonomy.qza",
-    sample_data = here::here("hiseas_metadata.txt"))))
+    ASV_data=here::here("hiseas_table.qza"),
+    phylo_tree=here::here("hiseas_rooted-tree"),
+    taxonomy_data=here::here("hiseas_taxonomy.qza"), 
+    sample_data = here::here("hiseas_metadata.txt")))
 ```
 
 ```{r}
