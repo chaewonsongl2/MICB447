@@ -56,7 +56,6 @@ tree <- multi2di(tree)
 
 # Combine all information into a single phyloseq object
 physeq <- merge_phyloseq(biom_file, metadata, tree)
-
 physeq_rar <- rarefy_even_depth(physeq, sample.size = 30000)
 ```
 ```{r}
@@ -250,5 +249,40 @@ plot_ordination(physeq,
   stat_ellipse(type = "norm", size = 0.5)
 
 # Run PERMANOVA
+```
+
+```{r}
+#Install Microeco CRAN packages
+install.packages("microeco")
+install.packages("file2meco")
+install.packages("picante")
+install.packages("GUniFrac")
+install.packages("ggalluvial")
+install.packages("ggh4x")
+install.packages("ggpubr")
+install.packages("randomForest")
+install.packages("igraph")
+install.packages("rgexf")
+install.packages("htmlwidgets")
+```
+
+```{r}
+#Load Microeco CRAN Packages
+library(here)
+library(tidyverse)
+library(microeco)
+library(cowplot)
+library(file2meco)
+library(picante)
+library(GUniFrac)
+library(ggalluvial)
+library(ggh4x)
+library(ggpubr)
+library(randomForest)
+library(igraph)
+library(rgexf)
+library(htmlwidgets)
+```
+```{r}
 ```
 
