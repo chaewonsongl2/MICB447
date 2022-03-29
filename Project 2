@@ -57,6 +57,8 @@ qiime feature-table tabulate-seqs \
   --i-data hiseas_rep-seqs.qza \
   --o-visualization hiseas_rep-seqs.qzv
 
+### Taxonomic analysis
+
 # Taxonomic analysis
 qiime feature-classifier classify-sklearn \
   --i-classifier /mnt/datasets/classifiers/silva-138-99-515-806-nb-classifier.qza \
@@ -80,6 +82,8 @@ qiime taxa filter-table \
   --i-taxonomy hiseas_taxonomy.qza \
   --p-exclude mitochondria,chloroplast \
   --o-filtered-table hiseas_table-no-mi-ch.qza
+  
+ ### Diversity analyses
   
   # Generate a tree for phylogenetic diversity analyses
 qiime phylogeny align-to-tree-mafft-fasttree \
