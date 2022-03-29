@@ -85,6 +85,22 @@ species
 ```
 
 ```{r}
+# Step 2
+wood <- subset_samples(physeq, orig_env_material == "wood")
+# Step 5
+wood_counts <- taxa_sums(wood)
+relative_abundance_wood <- calculate_relative_abundance(wood_counts)
+abundant_wood <- relative_abundance_wood > 0.0005
+abundant_wood_taxa <- prune_taxa(abundant_wood, wood)
+# Step 6
+abundant_wood_genera <- tax_glom(abundant_wood_taxa, taxrank = "Genus")
+abundant_wood_genera
+sample_data(abundant_wood_genera)$orig_env_material <-
+  factor(sample_data(abundant_wood_genera)$orig_env_material,
+         levels = c("matcontrol", "wood"))
+```
+
+```{r}
 deseq_plastic <- phyloseq_to_deseq2(abundant_plastic_genera, ~ orig_env_material)
 geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
 deseq_plastic <- estimateSizeFactors(deseq_plastic, geoMeans = geo_means)
@@ -105,7 +121,7 @@ plot_ordination(physeq,
   stat_ellipse(type = "norm", size = 0.5)
 ```
 
-```{r}
+```{r Microeco Install}
 #Install Microeco CRAN packages
 install.packages("microeco")
 install.packages("file2meco")
@@ -120,7 +136,7 @@ install.packages("rgexf")
 install.packages("htmlwidgets")
 ```
 
-```{r}
+```{r Microeco Load}
 #Load Microeco CRAN Packages
 library(here)
 library(tidyverse)
@@ -137,14 +153,15 @@ library(igraph)
 library(rgexf)
 library(htmlwidgets)
 ```
-```{r}
+
+```{r Set.Seed}
 ## set.seed is used to fix the random number generation to make the results repeatable
 set.seed(800)
 theme_set(theme_bw(base_size=18))
 calculate_relative_abundance <- function(x) x/sum(x)
 ```
 
-```{r}
+```{r Import Microeco}
 #Import qza artifacts to microeco
 (meco_data<-qiime2meco(
     ASV_data=here::here("hiseas-table.qza"),
@@ -152,6 +169,7 @@ calculate_relative_abundance <- function(x) x/sum(x)
     taxonomy_data=here::here("hiseas-taxonomy.qza",
     sample_data = here::here("hiseas_metadata.txt"))))
 ```
+
 ```{r}
 head(meco_data$otu_table)
 meco_data$sample_table
@@ -163,8 +181,6 @@ head(meco_data$tax_table)
 ```{r}
 #Data processing 
 dataset$sample_sums()
-```
-```{r}
 #Filter by metadata
 #Filter the samples to only include surface samples
 dataset$sample_table <- dataset$sample_table %>% filter(`collection_device` == "swab")
@@ -180,6 +196,7 @@ typeof(dataset$taxa_abund)
 names(dataset$taxa_abund)
 dataset$taxa_abund$Class [1:5,1:5]
 ```
+
 ```{r Removing Low Abundant Features}
 #Removing low abundant features
 total_counts <- dataset$taxa_sums()
@@ -188,6 +205,7 @@ relative_abundance <- calculate_relative_abundance(total_counts)
 abundant <- relative_abundance > 0.0005 
 dataset$tidy_dataset()
 ```
+
 ```{r Taxonomic Level}
 #extract relative abundance information on Genera
 genera_RA <- dataset$taxa_abund$Genus %>% as_tibble(rownames = "Feature_Taxonomy")
@@ -206,16 +224,52 @@ ggplot(filter(genera_RA, g =="g__Akkermansia"), aes(x=subject, y = Relative_Abun
 ```
 
 
-```{R Abundance Plots}
+```{R Abundance Plots: Venn}
 #Creating a Venn Diagram comparing wood and plastic
 surface_venn_dataset<- meco_data$merge_samples(use_group = "orig_env_material")
 surface_venn_dataset
 # create trans_venn object
 t1 <- trans_venn$new(surface_venn_dataset, ratio = "numratio")
+t1$plot_venn()
 ```
 
-```{r}
+```{r Abundance Plots: Barplot}
+unique(meco_data$tax_table$Phylum)
+#Create the trans_abund object
+t1 <- trans_abund$new(dataset = meco_data, taxrank = "Phylum", ntaxa = 10)
+t1$plot_bar(others_color = "grey70", facet = "`orig_env_material`", xtext_keep = FALSE)
 
+#mean abundance?
+t1 <- trans_abund$new(dataset = meco_data, taxrank = "Phylum", ntaxa = 10, groupmean = "subject")
 ```
 
+```{r Heatmaps}
+t1 <- trans_abund$new(dataset = meco_data, taxrank = "Genus", ntaxa = 40)
+t1$plot_heatmap(facet = "orig_env_material", xtext_keep = FALSE, withmargin = FALSE)
+```
+
+```{r Beta Diversity Analyses: }
+meco_rar <- clone(meco_data)
+meco_rar$rarefy_samples(sample.size = 1250)
+meco_rar$cal_betadiv(unifrac = T)
+t1 <- trans_beta$new(dataset = meco_rar, group = "`orig_env_material`", measure = "bray")
+```
+
+```{r Ordination}
+t1$cal_ordination(ordination = "PCoA")
+# plot the PCoA result
+t1$plot_ordination(plot_color = "`orig_env_material`", plot_shape = "`orig_env_material`", plot_group_ellipse = TRUE)
+```
+
+```{r Differential Abundance}
+meco_data$cal_abund()
+t1 <- trans_diff$new(dataset = meco_data, method = "rf", group = "body-site", alpha = 0.01, rf_taxa_level = "Phylum")
+#Produce plots for strength of indicator value and the other for relative abundances
+plots <- t1$plot_diff_abund(use_number = 1:20, only_abund_plot = FALSE)
+plot_grid(plots$p1, plots$p2)
+```
+
+```{r Network Construction}
+
+```
 
