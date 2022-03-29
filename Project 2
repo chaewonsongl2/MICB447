@@ -42,7 +42,7 @@ qiime feature-table filter-features \
   
 # Metadata-based filtering
 qiime feature-table filter-samples \
---i-table hiseas_table.qza \
+--i-table frequency-filtered-table.qza \
 --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
 --p-where "[collection_device]='swab'" \
 --o-filtered-table swab-filtered_hiseas_table.qza
