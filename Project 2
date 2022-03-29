@@ -36,7 +36,7 @@ qiime metadata tabulate \
 
 # Filter to remove rare ASV's accounting for less than 0.005% of total reads
 qiime feature-table filter-features \
-  --i-table hiseas.qza \
+  --i-table hiseas_table.qza \
   --p-min-frequency 590 \
   --o-filtered-table frequency-filtered-table.qza  
   
