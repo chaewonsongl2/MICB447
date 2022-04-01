@@ -97,7 +97,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 qiime diversity alpha-rarefaction \
 --i-table hiseas_table-no-mi-ch.qza \
 --i-phylogeny hiseas_rooted-tree.qza \
---p-max-depth 18000 \
+--p-max-depth 97000 \
 --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
 --o-visualization alpha-rarefaction.qzv
 
