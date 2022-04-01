@@ -22,7 +22,7 @@ qiime demux summarize \
 qiime dada2 denoise-single \
   --i-demultiplexed-seqs hiseas_demux.qza \
   --p-trim-left 0 \
-  --p-trunc-len 293 \
+  --p-trunc-len 220 \
   --o-representative-sequences hiseas_rep-seqs.qza \
   --o-table hiseas_table.qza \
   --o-denoising-stats hiseas_stats.qza
