@@ -128,7 +128,7 @@ plot_ordination(physeq,
   stat_ellipse(type = "norm", size = 0.5)
 ```
 
-```{r}
+```{r PCoA Plastic Only}
 plastic_only <- subset_samples(no_water_samplingequipment, orig_env_material != "wood")
 
 ord <- ordinate(plastic_only, method = "PCoA", distance = "wunifrac")
