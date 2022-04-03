@@ -6,7 +6,7 @@ screen -S hiseas_demux
 #load qiime2 on detached screen
 conda activate qiime2-2021.11
 
-#Import hiseas data using manifest TO /data/hiseas
+#Import hiseas data using manifest TO /data/hiseas/UJEMI
 qiime tools import \
 --type 'SampleData[SequencesWithQuality]' \
 --input-path /mnt/datasets/project_2/hiseas/hiseas_manifest.txt \
@@ -22,7 +22,7 @@ qiime demux summarize \
 qiime dada2 denoise-single \
   --i-demultiplexed-seqs hiseas_demux.qza \
   --p-trim-left 0 \
-  --p-trunc-len 293 \
+  --p-trunc-len 220 \
   --o-representative-sequences hiseas_rep-seqs.qza \
   --o-table hiseas_table.qza \
   --o-denoising-stats hiseas_stats.qza
@@ -97,7 +97,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 qiime diversity alpha-rarefaction \
 --i-table hiseas_table-no-mi-ch.qza \
 --i-phylogeny hiseas_rooted-tree.qza \
---p-max-depth 18000 \
+--p-max-depth 97000 \
 --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
 --o-visualization alpha-rarefaction.qzv
 
@@ -105,79 +105,34 @@ qiime diversity alpha-rarefaction \
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny hiseas_rooted-tree.qza \
   --i-table hiseas_table-no-mi-ch.qza \
-  --p-sampling-depth 3454\
+  --p-sampling-depth 10000\
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --output-dir hiseas_core-metrics-results
-#old sampling depth
-
-# Calculate alpha- and beta-diversity metrics
-qiime diversity core-metrics-phylogenetic \
-  --i-phylogeny hiseas_rooted-tree.qza \
-  --i-table hiseas_table-no-mi-ch.qza \
-  --p-sampling-depth 4000\
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --output-dir hiseas_core-metrics-results-2
-#chosen sampling depth 4000
 
 # Calculate alpha-group-significance
 qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results-2/faith_pd_vector.qza \
+  --i-alpha-diversity hiseas_core-metrics-results/faith_pd_vector.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results-2/faith-pd-group-significance.qzv
+  --o-visualization hiseas_core-metrics-results/faith-pd-group-significance.qzv
 
 qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results-2/evenness_vector.qza \
+  --i-alpha-diversity hiseas_core-metrics-results/evenness_vector.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results-2/evenness-group-significance.qzv
+  --o-visualization hiseas_core-metrics-results/evenness-group-significance.qzv
 
 # Calculate beta-group-significance for orig_env_material
 qiime diversity beta-group-significance \
-  --i-distance-matrix hiseas_core-metrics-results-2/unweighted_unifrac_distance_matrix.qza \
+  --i-distance-matrix hiseas_core-metrics-results/unweighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --m-metadata-column orig_env_material \
-  --o-visualization hiseas_core-metrics-results-2/unweighted-unifrac-orig_env_material-significance.qzv \
+  --o-visualization hiseas_core-metrics-results/unweighted-unifrac-orig_env_material-significance.qzv \
   --p-pairwise
 
 qiime diversity beta-group-significance \
-  --i-distance-matrix hiseas_core-metrics-results-2/unweighted_unifrac_distance_matrix.qza \
+  --i-distance-matrix hiseas_core-metrics-results/unweighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --m-metadata-column description \
-  --o-visualization hiseas_core-metrics-results-2/unweighted-unifrac-description-group-significance.qzv \
+  --o-visualization hiseas_core-metrics-results/unweighted-unifrac-description-group-significance.qzv \
   --p-pairwise
 
-# Cut off at 5500 - exclude water and sampling equipment controls
 
-# Calculate alpha- and beta-diversity metrics
-qiime diversity core-metrics-phylogenetic \
-  --i-phylogeny hiseas_rooted-tree.qza \
-  --i-table hiseas_table-no-mi-ch.qza \
-  --p-sampling-depth 5500 \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --output-dir hiseas_core-metrics-results-3
-#chosen sampling depth 5500
-
-# Calculate alpha-group-significance
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results-3/faith_pd_vector.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results-3/faith-pd-group-significance.qzv
-
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results-3/evenness_vector.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results-2/evenness-group-significance.qzv
-
-# Calculate beta-group-significance for orig_env_material
-qiime diversity beta-group-significance \
-  --i-distance-matrix hiseas_core-metrics-results-3/unweighted_unifrac_distance_matrix.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --m-metadata-column orig_env_material \
-  --o-visualization hiseas_core-metrics-results-3/unweighted-unifrac-orig_env_material-significance.qzv \
-  --p-pairwise
-
-qiime diversity beta-group-significance \
-  --i-distance-matrix hiseas_core-metrics-results-3/unweighted_unifrac_distance_matrix.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --m-metadata-column description \
-  --o-visualization hiseas_core-metrics-results-3/unweighted-unifrac-description-group-significance.qzv \
-  --p-pairwise
