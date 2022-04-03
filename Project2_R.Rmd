@@ -36,11 +36,6 @@ library(ape)
 library(phyloseq)
 library(DESeq2)
 
-#Install package from Github
-if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
-devtools::install_github("jbisanz/qiime2R")
-remotes::install_github("vmikk/metagMisc")
-
 #Loading special packages
 library(qiime2R)
 library(metagMisc)
@@ -130,7 +125,12 @@ plot_ordination(physeq,
   stat_ellipse(type = "norm", size = 0.5)
 ```
 
-```{r}
-Taxonomy <- read_qza
+```{r Differential Taxonomic Analysis: Plastic}
+taxonomy <- read_qza(here::here("hiseas_taxonomy.qza"))
+phy_tree(physeq) <- multi2di(phy_tree(physeq))
+physeq@otu_table [1:5, 1:5]
+head(tax_table(physeq))
+
+physeq_rar <- rarefy_even_depth(physeq, sample.size = 30000)
 ```
 
