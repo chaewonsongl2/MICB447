@@ -220,6 +220,13 @@ ggplot(significant_toilet_bed, aes(x = log2FoldChange, y = Genus)) +
 
 ggplot(significant_living_toilet, aes(x = log2FoldChange, y = Genus)) +
   geom_bar(stat = "identity") +
+  labs(title = "Living Room vs Toilet",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 18)
+
+ggplot(significant_living_bed, aes(x = log2FoldChange, y = Genus)) +
+  geom_bar(stat = "identity") +
   labs(title = "Living Room vs Bed",
        x = expression(log[2]~fold~change),
        y = "Genus") +
