@@ -45,15 +45,7 @@ remotes::install_github("vmikk/metagMisc")
 library(qiime2R)
 library(metagMisc)
 ```
-```{r}
-# Calculate relative abundance
-calculate_relative_abundance <- function(x) x / sum(x)
 
-# Calculate geometric mean 
-calculate_gm_mean <- function(x, na.rm = TRUE) {
-  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
-}
-```
 
 ```{r Import from QIIME}
 biom_file <- import_biom("table-with-taxonomy.biom")
@@ -65,59 +57,70 @@ tree <- multi2di(tree)
 
 # Combine all information into a single phyloseq object
 physeq <- merge_phyloseq(biom_file, metadata, tree)
-physeq_rar <- rarefy_even_depth(physeq, sample.size = 30000)
-```
-```{r}
-head(sample_data(physeq))
+physeq_rar <- rarefy_even_depth(physeq, sample.size = 10000)
 ```
 ```{r}
 colnames(tax_table(physeq)) <- c("Kingdom", "Phylum", "Class","Order", "Family",
                                  "Genus", "Species")
 tax_table(physeq)
 ```
-
-```{r}
-total_counts <- taxa_sums(physeq)
-relative_abundance <- calculate_relative_abundance(total_counts)
-```
-
-```{r} 
-abundant <- relative_abundance > 0.0005 
-abundant_taxa <- prune_taxa(abundant, physeq)
-abundant_taxa
-```
-
-
 ```{r}
 species <- tax_glom(physeq, taxrank = "Species", NArm = FALSE)
 species
 ```
 
+
+### Differential abundance analysis ###
 ```{r}
-# Step 2
-wood <- subset_samples(physeq, orig_env_material == "wood")
-# Step 5
-wood_counts <- taxa_sums(wood)
-relative_abundance_wood <- calculate_relative_abundance(wood_counts)
-abundant_wood <- relative_abundance_wood > 0.0005
-abundant_wood_taxa <- prune_taxa(abundant_wood, wood)
-# Step 6
-abundant_wood_genera <- tax_glom(abundant_wood_taxa, taxrank = "Genus")
-abundant_wood_genera
-sample_data(abundant_wood_genera)$orig_env_material <-
-  factor(sample_data(abundant_wood_genera)$orig_env_material,
-         levels = c("matcontrol", "wood"))
+# Calculate relative abundance
+calculate_relative_abundance <- function(x) x / sum(x)
+total_counts <- taxa_sums(physeq)
+relative_abundance <- calculate_relative_abundance(total_counts)
+
+abundant <- relative_abundance > 0.0005 
+abundant_taxa <- prune_taxa(abundant, physeq)
+
+# Calculate geometric mean 
+calculate_gm_mean <- function(x, na.rm = TRUE) {
+  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
+}
+
+### DESeq object creation and exploration
+
+plastic <- subset_samples(physeq, orig_env_material == "plastic")
+
+plastic_counts <-taxa_sums(plastic)
+relative_abundance_plastic <- calculate_relative_abundance(plastic_counts)
+abundant_plastic <- relative_abundance_plastic > 0.0005
+abundant_plastic_taxa <- prune_taxa(abundant_plastic, plastic)
+
+abundant_plastic_genera <- tax_glom(abundant_plastic_taxa, taxrank = "Genus")
+abundant_plastic_genera
+
+deseq_plastic <- phyloseq_to_deseq2(abundant_plastic_genera, ~feature)
+as_tibble(colData(deseq_plastic))
 ```
 
 ```{r}
+deseq_plastic$feature <- relevel(deseq_plastic$feature, ref = "subject")
+
+
 deseq_plastic <- phyloseq_to_deseq2(abundant_plastic_genera, ~ orig_env_material)
 geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
 deseq_plastic <- estimateSizeFactors(deseq_plastic, geoMeans = geo_means)
 deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
 
 plastic_diff_abund <- results(deseq_plastic)
+
+
+
+sample_data(abundant_wood_genera)$orig_env_material <-
+  factor(sample_data(abundant_wood_genera)$orig_env_material,
+         levels = c("matcontrol", "wood"))
+```
 ```
 
+### PCoA Plot
 ```{r}
 ord <- ordinate(physeq, method = "PCoA", distance = "wunifrac")
 
