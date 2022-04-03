@@ -109,17 +109,6 @@ qiime diversity core-metrics-phylogenetic \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --output-dir hiseas_core-metrics-results
 
-# Calculate alpha-group-significance
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results/faith_pd_vector.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results/faith-pd-group-significance.qzv
-
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results/evenness_vector.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results/evenness-group-significance.qzv
-
 # Calculate beta-group-significance for orig_env_material
 qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results/unweighted_unifrac_distance_matrix.qza \
