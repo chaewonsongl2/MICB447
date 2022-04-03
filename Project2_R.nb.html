@@ -217,6 +217,7 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<<<<<<< HEAD
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMjIyBSIFNDUklQVCAtIEhJU0VBUyBEQVRBU0VUIC0gQUxQSEEgRElWRVJTSVRZIFBMT1RTXG5cbiMgTG9hZCBDUkFOIHBhY2thZ2VzXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkodmVnYW4pXG5saWJyYXJ5KGFwZSlcblxuIyBMb2FkIEJpb2NvbmR1Y3RvciBwYWNrYWdlc1xubGlicmFyeShwaHlsb3NlcSlcblxuIyBMb2FkIGFkZGl0aW9uYWwgZ2dwbG90IHBhY2thZ2VzXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KGdndGhlbWVzKVxuXG4jIERlZmluZSB0aGUgc2V0IG9mIHJhbmRvbSBudW1iZXJzXG5zZXQuc2VlZCg4MDApXG5cbiMgRGVmaW5lIG5hbWUgb2YgbWV0YWRhdGEgZmlsZVxubWV0YWRhdGFfZmlsZSA8LSBcImhpc2Vhc19tZXRhZGF0YS50eHRcIlxuIyBMb2FkIHRoZSBtZXRhZGF0YSBmaWxlXG5gYGAifQ== -->
 <pre class="r"><code>#### R SCRIPT - HISEAS DATASET - ALPHA DIVERSITY PLOTS
 
@@ -224,6 +225,38 @@ pre code {
 library(tidyverse)
 library(vegan)
 library(ape)
+=======
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMjIyBSIFNDUklQVCAtIEhJU0VBUyBEQVRBU0VUIC0gQUxQSEEgRElWRVJTSVRZIFBMT1RTXG5cbiMgTG9hZCBDUkFOIHBhY2thZ2VzXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmBgYCJ9 -->
+<pre class="r"><code>#### R SCRIPT - HISEAS DATASET - ALPHA DIVERSITY PLOTS
+
+# Load CRAN packages
+library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4xIOKUgOKUgFxu4pyTIGdncGxvdDIgMy4zLjUgICAgIOKckyBwdXJyciAgIDAuMy40XG7inJMgdGliYmxlICAzLjEuNiAgICAg4pyTIGRwbHlyICAgMS4wLjhcbuKckyB0aWR5ciAgIDEuMi4wICAgICDinJMgc3RyaW5nciAxLjQuMFxu4pyTIHJlYWRyICAgMi4xLjIgICAgIOKckyBmb3JjYXRzIDAuNS4xXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG54IGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+── Attaching packages ─────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.1 ──
+✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.8
+✓ tidyr   1.2.0     ✓ stringr 1.4.0
+✓ readr   2.1.2     ✓ forcats 0.5.1
+── Conflicts ────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh2ZWdhbilcbmBgYCJ9 -->
+<pre class="r"><code>library(vegan)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBwZXJtdXRlXG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IGxhdHRpY2VcblRoaXMgaXMgdmVnYW4gMi41LTdcbiJ9 -->
+<pre><code>Loading required package: permute
+Loading required package: lattice
+This is vegan 2.5-7</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShhcGUpXG5cbiMgTG9hZCBCaW9jb25kdWN0b3IgcGFja2FnZXNcbmxpYnJhcnkocGh5bG9zZXEpXG5cbiMgTG9hZCBhZGRpdGlvbmFsIGdncGxvdCBwYWNrYWdlc1xubGlicmFyeShnZ3Bsb3QyKVxubGlicmFyeShnZ3RoZW1lcylcblxuIyBEZWZpbmUgdGhlIHNldCBvZiByYW5kb20gbnVtYmVyc1xuc2V0LnNlZWQoODAwKVxuXG4jIERlZmluZSBuYW1lIG9mIG1ldGFkYXRhIGZpbGVcbm1ldGFkYXRhX2ZpbGUgPC0gXCJoaXNlYXNfbWV0YWRhdGEudHh0XCJcbiMgTG9hZCB0aGUgbWV0YWRhdGEgZmlsZVxuYGBgIn0= -->
+<pre class="r"><code>library(ape)
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 
 # Load Bioconductor packages
 library(phyloseq)
@@ -243,6 +276,7 @@ metadata_file &lt;- &quot;hiseas_metadata.txt&quot;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<<<<<<< HEAD
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIENSQU4gcGFja2FnZXNcbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeSh2ZWdhbilcbmxpYnJhcnkoYXBlKVxuXG4jIExvYWQgQmlvY29uZHVjdG9yIHBhY2thZ2VzXG5saWJyYXJ5KHBoeWxvc2VxKVxubGlicmFyeShERVNlcTIpXG5gYGAifQ== -->
 <pre class="r"><code># Load CRAN packages
 library(tidyverse)
@@ -252,7 +286,30 @@ library(ape)
 # Load Bioconductor packages
 library(phyloseq)
 library(DESeq2)</code></pre>
+=======
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jTG9hZGluZyBzcGVjaWFsIHBhY2thZ2VzXG5saWJyYXJ5KHFpaW1lMlIpXG5cbmBgYCJ9 -->
+<pre class="r"><code>
+#Loading special packages
+library(qiime2R)
+</code></pre>
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ2h0bWx3aWRnZXRzJzpcbiAgbWV0aG9kICAgICAgICAgICBmcm9tICAgICAgICAgXG4gIHByaW50Lmh0bWx3aWRnZXQgdG9vbHM6cnN0dWRpb1xuIn0= -->
+<pre><code>Registered S3 method overwritten by &#39;htmlwidgets&#39;:
+  method           from         
+  print.htmlwidget tools:rstudio</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShtZXRhZ01pc2MpXG5gYGAifQ== -->
+<pre class="r"><code>library(metagMisc)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYbWV0YWdNaXNj4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6cHVycnLigJk6XG5cbiAgICBzb21lXG4ifQ== -->
+<pre><code>
+Attaching package: ‘metagMisc’
+
+The following object is masked from ‘package:purrr’:
+
+    some</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhdGUgcmVsYXRpdmUgYWJ1bmRhbmNlXG5jYWxjdWxhdGVfcmVsYXRpdmVfYWJ1bmRhbmNlIDwtIGZ1bmN0aW9uKHgpIHggLyBzdW0oeClcblxuIyBDYWxjdWxhdGUgZ2VvbWV0cmljIG1lYW4gXG5jYWxjdWxhdGVfZ21fbWVhbiA8LSBmdW5jdGlvbih4LCBuYS5ybSA9IFRSVUUpIHtcbiAgZXhwKHN1bShsb2coeFt4ID4gMF0pLCBuYS5ybSA9IG5hLnJtKSAvIGxlbmd0aCh4KSlcbn1cbmBgYCJ9 -->
@@ -268,6 +325,7 @@ calculate_gm_mean &lt;- function(x, na.rm = TRUE) {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<<<<<<< HEAD
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlvbV9maWxlIDwtIGltcG9ydF9iaW9tKFwidGFibGUtd2l0aC10YXhvbm9teS5iaW9tXCIpXG5tZXRhZGF0YSAgPC0gaW1wb3J0X3FpaW1lX3NhbXBsZV9kYXRhKFwiaGlzZWFzX21ldGFkYXRhLnR4dFwiKVxudHJlZSAgICAgIDwtIHJlYWRfdHJlZV9ncmVlbmdlbmVzKFwidHJlZS5ud2tcIilcblxuIyBDb252ZXJ0IGZyb20gbXVsdGljaG90b21vdXMgdG8gZGljaG90bW91cyB0cmVlXG50cmVlIDwtIG11bHRpMmRpKHRyZWUpXG5cbiMgQ29tYmluZSBhbGwgaW5mb3JtYXRpb24gaW50byBhIHNpbmdsZSBwaHlsb3NlcSBvYmplY3RcbnBoeXNlcSA8LSBtZXJnZV9waHlsb3NlcShiaW9tX2ZpbGUsIG1ldGFkYXRhLCB0cmVlKVxucGh5c2VxX3JhciA8LSByYXJlZnlfZXZlbl9kZXB0aChwaHlzZXEsIHNhbXBsZS5zaXplID0gMzAwMDApXG5gYGAifQ== -->
 <pre class="r"><code>biom_file &lt;- import_biom(&quot;table-with-taxonomy.biom&quot;)
 metadata  &lt;- import_qiime_sample_data(&quot;hiseas_metadata.txt&quot;)
@@ -279,6 +337,11 @@ tree &lt;- multi2di(tree)
 # Combine all information into a single phyloseq object
 physeq &lt;- merge_phyloseq(biom_file, metadata, tree)
 physeq_rar &lt;- rarefy_even_depth(physeq, sample.size = 30000)</code></pre>
+=======
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGh5c2VxX3JhciA8LSByYXJlZnlfZXZlbl9kZXB0aChwaHlzZXEsIHNhbXBsZS5zaXplID0gMzAwMDApXG5cbmBgYCJ9 -->
+<pre class="r"><code>physeq_rar &lt;- rarefy_even_depth(physeq, sample.size = 30000)
+</code></pre>
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
@@ -313,15 +376,14 @@ abundant_taxa</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3BlY2llcyA8LSB0YXhfZ2xvbShwaHlzZXEsIHRheHJhbmsgPSBcIlNwZWNpZXNcIiwgTkFybSA9IEZBTFNFKVxuc3BlY2llc1xuYGBgIn0= -->
-<pre class="r"><code>species &lt;- tax_glom(physeq, taxrank = &quot;Species&quot;, NArm = FALSE)
-species</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3BlY2llcyA8LSB0YXhfZ2xvbShwaHlzZXEsIHRheHJhbmsgPSBcIlNwZWNpZXNcIiwgTkFybSA9IEZBTFNFKVxuYGBgIn0= -->
+<pre class="r"><code>species &lt;- tax_glom(physeq, taxrank = &quot;Species&quot;, NArm = FALSE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdGVwIDJcbndvb2QgPC0gc3Vic2V0X3NhbXBsZXMocGh5c2VxLCBvcmlnX2Vudl9tYXRlcmlhbCA9PSBcIndvb2RcIilcbiMgU3RlcCA1XG53b29kX2NvdW50cyA8LSB0YXhhX3N1bXMod29vZClcbnJlbGF0aXZlX2FidW5kYW5jZV93b29kIDwtIGNhbGN1bGF0ZV9yZWxhdGl2ZV9hYnVuZGFuY2Uod29vZF9jb3VudHMpXG5hYnVuZGFudF93b29kIDwtIHJlbGF0aXZlX2FidW5kYW5jZV93b29kID4gMC4wMDA1XG5hYnVuZGFudF93b29kX3RheGEgPC0gcHJ1bmVfdGF4YShhYnVuZGFudF93b29kLCB3b29kKVxuIyBTdGVwIDZcbmFidW5kYW50X3dvb2RfZ2VuZXJhIDwtIHRheF9nbG9tKGFidW5kYW50X3dvb2RfdGF4YSwgdGF4cmFuayA9IFwiR2VudXNcIilcbmFidW5kYW50X3dvb2RfZ2VuZXJhXG5zYW1wbGVfZGF0YShhYnVuZGFudF93b29kX2dlbmVyYSkkb3JpZ19lbnZfbWF0ZXJpYWwgPC1cbiAgZmFjdG9yKHNhbXBsZV9kYXRhKGFidW5kYW50X3dvb2RfZ2VuZXJhKSRvcmlnX2Vudl9tYXRlcmlhbCxcbiAgICAgICAgIGxldmVscyA9IGMoXCJtYXRjb250cm9sXCIsIFwid29vZFwiKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdGVwIDJcbndvb2QgPC0gc3Vic2V0X3NhbXBsZXMocGh5c2VxLCBvcmlnX2Vudl9tYXRlcmlhbCA9PSBcIndvb2RcIilcbiMgU3RlcCA1XG53b29kX2NvdW50cyA8LSB0YXhhX3N1bXMod29vZClcbnJlbGF0aXZlX2FidW5kYW5jZV93b29kIDwtIGNhbGN1bGF0ZV9yZWxhdGl2ZV9hYnVuZGFuY2Uod29vZF9jb3VudHMpXG5hYnVuZGFudF93b29kIDwtIHJlbGF0aXZlX2FidW5kYW5jZV93b29kID4gMC4wMDA1XG5hYnVuZGFudF93b29kX3RheGEgPC0gcHJ1bmVfdGF4YShhYnVuZGFudF93b29kLCB3b29kKVxuIyBTdGVwIDZcbmFidW5kYW50X3dvb2RfZ2VuZXJhIDwtIHRheF9nbG9tKGFidW5kYW50X3dvb2RfdGF4YSwgdGF4cmFuayA9IFwiR2VudXNcIilcbmFidW5kYW50X3dvb2RfZ2VuZXJhXG5gYGAifQ== -->
 <pre class="r"><code># Step 2
 wood &lt;- subset_samples(physeq, orig_env_material == &quot;wood&quot;)
 # Step 5
@@ -331,6 +393,7 @@ abundant_wood &lt;- relative_abundance_wood &gt; 0.0005
 abundant_wood_taxa &lt;- prune_taxa(abundant_wood, wood)
 # Step 6
 abundant_wood_genera &lt;- tax_glom(abundant_wood_taxa, taxrank = &quot;Genus&quot;)
+<<<<<<< HEAD
 abundant_wood_genera
 sample_data(abundant_wood_genera)$orig_env_material &lt;-
   factor(sample_data(abundant_wood_genera)$orig_env_material,
@@ -551,79 +614,27 @@ calculate_relative_abundance &lt;- function(x) x/sum(x)</code></pre>
 <!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcmVhZF9xMm1ldGFkYXRhKHNhbXBsZV9kYXRhKSA6IFxuICBNZXRhZGF0YSBkb2VzIG5vdCBkZWZpbmUgdHlwZXMgKGllIHNlY29uZCBsaW5lIGRvZXMgbm90IHN0YXJ0IHdpdGggI3EyOnR5cGVzKVxuIn0= -->
 <pre><code>Error in read_q2metadata(sample_data) : 
   Metadata does not define types (ie second line does not start with #q2:types)</code></pre>
+=======
+abundant_wood_genera</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoicGh5bG9zZXEtY2xhc3MgZXhwZXJpbWVudC1sZXZlbCBvYmplY3Rcbm90dV90YWJsZSgpICAgT1RVIFRhYmxlOiAgICAgICAgIFsgNDQgdGF4YSBhbmQgMjYgc2FtcGxlcyBdXG5zYW1wbGVfZGF0YSgpIFNhbXBsZSBEYXRhOiAgICAgICBbIDI2IHNhbXBsZXMgYnkgMzYgc2FtcGxlIHZhcmlhYmxlcyBdXG50YXhfdGFibGUoKSAgIFRheG9ub215IFRhYmxlOiAgICBbIDQ0IHRheGEgYnkgNyB0YXhvbm9taWMgcmFua3MgXVxucGh5X3RyZWUoKSAgICBQaHlsb2dlbmV0aWMgVHJlZTogWyA0NCB0aXBzIGFuZCA0MyBpbnRlcm5hbCBub2RlcyBdXG4ifQ== -->
+<pre><code>phyloseq-class experiment-level object
+otu_table()   OTU Table:         [ 44 taxa and 26 samples ]
+sample_data() Sample Data:       [ 26 samples by 36 sample variables ]
+tax_table()   Taxonomy Table:    [ 44 taxa by 7 taxonomic ranks ]
+phy_tree()    Phylogenetic Tree: [ 44 tips and 43 internal nodes ]</code></pre>
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 <!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChtZWNvX2RhdGEkb3R1X3RhYmxlKVxubWVjb19kYXRhJHNhbXBsZV90YWJsZVxuaGVhZChtZWNvX2RhdGEkdGF4X3RhYmxlKVxuI0NyZWF0ZSBhIGR1bW15IGNvcHkgb2Ygb3VyIGRhdGFzZXRcbihkYXRhc2V0IDwtIGNsb25lKG1lY29fZGF0YSkpXG5gYGAifQ== -->
-<pre class="r"><code>head(meco_data$otu_table)
-meco_data$sample_table
-head(meco_data$tax_table)
-#Create a dummy copy of our dataset
-(dataset &lt;- clone(meco_data))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2FtcGxlX2RhdGEoYWJ1bmRhbnRfd29vZF9nZW5lcmEpJG9yaWdfZW52X21hdGVyaWFsIDwtXG4gIGZhY3RvcihzYW1wbGVfZGF0YShhYnVuZGFudF93b29kX2dlbmVyYSkkb3JpZ19lbnZfbWF0ZXJpYWwsXG4gICAgICAgICBsZXZlbHMgPSBjKFwibWF0Y29udHJvbFwiLCBcIndvb2RcIikpXG5gYGAifQ== -->
+<pre class="r"><code>sample_data(abundant_wood_genera)$orig_env_material &lt;-
+  factor(sample_data(abundant_wood_genera)$orig_env_material,
+         levels = c(&quot;matcontrol&quot;, &quot;wood&quot;))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0RhdGEgcHJvY2Vzc2luZyBcbmRhdGFzZXQkc2FtcGxlX3N1bXMoKVxuI0ZpbHRlciBieSBtZXRhZGF0YVxuI0ZpbHRlciB0aGUgc2FtcGxlcyB0byBvbmx5IGluY2x1ZGUgc3VyZmFjZSBzYW1wbGVzXG5kYXRhc2V0JHNhbXBsZV90YWJsZSA8LSBkYXRhc2V0JHNhbXBsZV90YWJsZSAlPiUgZmlsdGVyKGBjb2xsZWN0aW9uX2RldmljZWAgPT0gXCJzd2FiXCIpXG5kYXRhc2V0JHRpZHlfZGF0YXNldCgpXG4jUmFyZWZ5IGZpbHRlcmVkIGRhdGFcbmRhdGFzZXQkcmFyZWZ5X3NhbXBsZXMoc2FtcGxlLnNpemUgPSAxMDAwKVxuYGBgIn0= -->
-<pre class="r"><code>#Data processing 
-dataset$sample_sums()
-#Filter by metadata
-#Filter the samples to only include surface samples
-dataset$sample_table &lt;- dataset$sample_table %&gt;% filter(`collection_device` == &quot;swab&quot;)
-dataset$tidy_dataset()
-#Rarefy filtered data
-dataset$rarefy_samples(sample.size = 1000)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NhbGN1bGF0ZSByZWxhdGl2ZSBhYnVuZGFuY2VcbmRhdGFzZXQkY2FsX2FidW5kKHJlbD1UKVxudHlwZW9mKGRhdGFzZXQkdGF4YV9hYnVuZClcbm5hbWVzKGRhdGFzZXQkdGF4YV9hYnVuZClcbmRhdGFzZXQkdGF4YV9hYnVuZCRDbGFzcyBbMTo1LDE6NV1cbmBgYCJ9 -->
-<pre class="r"><code>#Calculate relative abundance
-dataset$cal_abund(rel=T)
-typeof(dataset$taxa_abund)
-names(dataset$taxa_abund)
-dataset$taxa_abund$Class [1:5,1:5]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1JlbW92aW5nIGxvdyBhYnVuZGFudCBmZWF0dXJlc1xudG90YWxfY291bnRzIDwtIGRhdGFzZXQkdGF4YV9zdW1zKClcbnJlbGF0aXZlX2FidW5kYW5jZSA8LSBjYWxjdWxhdGVfcmVsYXRpdmVfYWJ1bmRhbmNlKHRvdGFsX2NvdW50cylcbiNmaWx0ZXIgb3V0IGxvdyBhYnVuZGFudCBmZWF0dXJlc1xuYWJ1bmRhbnQgPC0gcmVsYXRpdmVfYWJ1bmRhbmNlID4gMC4wMDA1IFxuZGF0YXNldCR0aWR5X2RhdGFzZXQoKVxuYGBgIn0= -->
-<pre class="r"><code>#Removing low abundant features
-total_counts &lt;- dataset$taxa_sums()
-relative_abundance &lt;- calculate_relative_abundance(total_counts)
-#filter out low abundant features
-abundant &lt;- relative_abundance &gt; 0.0005 
-dataset$tidy_dataset()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2V4dHJhY3QgcmVsYXRpdmUgYWJ1bmRhbmNlIGluZm9ybWF0aW9uIG9uIEdlbmVyYVxuZ2VuZXJhX1JBIDwtIGRhdGFzZXQkdGF4YV9hYnVuZCRHZW51cyAlPiUgYXNfdGliYmxlKHJvd25hbWVzID0gXCJGZWF0dXJlX1RheG9ub215XCIpXG5cbiNPbmx5IGEgc25pcHBldCBzaG93blxuaGVhZChnZW5lcmFfUkEpXG5nZW5lcmFfUkEgPC0gZ2VuZXJhX1JBICU+JSBwaXZvdF9sb25nZXIoLUZlYXR1cmVfVGF4b25vbXksIHZhbHVlc190byA9IFwiUmVsYXRpdmVfQWJ1bmRhbmNlXCIsIG5hbWVzX3RvID0gXCJTYW1wbGVJRFwiKVxuXG4jTm93IHdlIGNhbiBqb2luIHRoaXMgd2l0aCB0aGUgbWV0YWRhdGEgYW5kIHBsb3RcbmdlbmVyYV9SQSA8LSBnZW5lcmFfUkEgJT4lIGxlZnRfam9pbihkYXRhc2V0JHNhbXBsZV90YWJsZSlcblxuI1NwbGl0IHVwIGZlYXR1cmUgdGF4b25vbXlcbmdlbmVyYV9SQSA8LSBnZW5lcmFfUkEgJT4lIHNlcGFyYXRlKEZlYXR1cmVfVGF4b25vbXksIGludG8gPSBjKFwia1wiLFwicFwiLFwiY1wiLFwib1wiLFwiZlwiLFwiZ1wiKSwgc2VwID0gXCJcXFxcfFwiKVxuZ2dwbG90KGZpbHRlcihnZW5lcmFfUkEsIGcgPT1cImdfX0Fra2VybWFuc2lhXCIpLCBhZXMoeD1zdWJqZWN0LCB5ID0gUmVsYXRpdmVfQWJ1bmRhbmNlKSkgK1xuICBnZW9tX2JveHBsb3QoKVxuYGBgIn0= -->
-<pre class="r"><code>#extract relative abundance information on Genera
-genera_RA &lt;- dataset$taxa_abund$Genus %&gt;% as_tibble(rownames = &quot;Feature_Taxonomy&quot;)
-
-#Only a snippet shown
-head(genera_RA)
-genera_RA &lt;- genera_RA %&gt;% pivot_longer(-Feature_Taxonomy, values_to = &quot;Relative_Abundance&quot;, names_to = &quot;SampleID&quot;)
-
-#Now we can join this with the metadata and plot
-genera_RA &lt;- genera_RA %&gt;% left_join(dataset$sample_table)
-
-#Split up feature taxonomy
-genera_RA &lt;- genera_RA %&gt;% separate(Feature_Taxonomy, into = c(&quot;k&quot;,&quot;p&quot;,&quot;c&quot;,&quot;o&quot;,&quot;f&quot;,&quot;g&quot;), sep = &quot;\\|&quot;)
-ggplot(filter(genera_RA, g ==&quot;g__Akkermansia&quot;), aes(x=subject, y = Relative_Abundance)) +
-  geom_boxplot()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
+<<<<<<< HEAD
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NyZWF0aW5nIGEgVmVubiBEaWFncmFtIGNvbXBhcmluZyB3b29kIGFuZCBwbGFzdGljXG5zdXJmYWNlX3Zlbm5fZGF0YXNldDwtIG1lY29fZGF0YSRtZXJnZV9zYW1wbGVzKHVzZV9ncm91cCA9IFwib3JpZ19lbnZfbWF0ZXJpYWxcIilcbnN1cmZhY2VfdmVubl9kYXRhc2V0XG4jIGNyZWF0ZSB0cmFuc192ZW5uIG9iamVjdFxudDEgPC0gdHJhbnNfdmVubiRuZXcoc3VyZmFjZV92ZW5uX2RhdGFzZXQsIHJhdGlvID0gXCJudW1yYXRpb1wiKVxudDEkcGxvdF92ZW5uKClcbmBgYCJ9 -->
 <pre class="r"><code>#Creating a Venn Diagram comparing wood and plastic
 surface_venn_dataset&lt;- meco_data$merge_samples(use_group = &quot;orig_env_material&quot;)
@@ -644,11 +655,21 @@ t1$plot_bar(others_color = &quot;grey70&quot;, facet = &quot;`orig_env_material`
 
 #mean abundance?
 t1 &lt;- trans_abund$new(dataset = meco_data, taxrank = &quot;Phylum&quot;, ntaxa = 10, groupmean = &quot;subject&quot;)</code></pre>
+=======
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVzZXFfcGxhc3RpYyA8LSBwaHlsb3NlcV90b19kZXNlcTIoYWJ1bmRhbnRfcGxhc3RpY19nZW5lcmEsIH4gb3JpZ19lbnZfbWF0ZXJpYWwpXG5nZW9fbWVhbnMgPC0gYXBwbHkoY291bnRzKGRlc2VxX3BsYXN0aWMpLCAxLCBjYWxjdWxhdGVfZ21fbWVhbilcbmRlc2VxX3BsYXN0aWMgPC0gZXN0aW1hdGVTaXplRmFjdG9ycyhkZXNlcV9wbGFzdGljLCBnZW9NZWFucyA9IGdlb19tZWFucylcbmRlc2VxX3BsYXN0aWMgPC0gREVTZXEoZGVzZXFfcGxhc3RpYywgZml0VHlwZSA9IFwibG9jYWxcIilcblxucGxhc3RpY19kaWZmX2FidW5kIDwtIHJlc3VsdHMoZGVzZXFfcGxhc3RpYylcbmBgYCJ9 -->
+<pre class="r"><code>deseq_plastic &lt;- phyloseq_to_deseq2(abundant_plastic_genera, ~ orig_env_material)
+geo_means &lt;- apply(counts(deseq_plastic), 1, calculate_gm_mean)
+deseq_plastic &lt;- estimateSizeFactors(deseq_plastic, geoMeans = geo_means)
+deseq_plastic &lt;- DESeq(deseq_plastic, fitType = &quot;local&quot;)
+
+plastic_diff_abund &lt;- results(deseq_plastic)</code></pre>
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<<<<<<< HEAD
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudDEgPC0gdHJhbnNfYWJ1bmQkbmV3KGRhdGFzZXQgPSBtZWNvX2RhdGEsIHRheHJhbmsgPSBcIkdlbnVzXCIsIG50YXhhID0gNDApXG50MSRwbG90X2hlYXRtYXAoZmFjZXQgPSBcIm9yaWdfZW52X21hdGVyaWFsXCIsIHh0ZXh0X2tlZXAgPSBGQUxTRSwgd2l0aG1hcmdpbiA9IEZBTFNFKVxuYGBgIn0= -->
 <pre class="r"><code>t1 &lt;- trans_abund$new(dataset = meco_data, taxrank = &quot;Genus&quot;, ntaxa = 40)
 t1$plot_heatmap(facet = &quot;orig_env_material&quot;, xtext_keep = FALSE, withmargin = FALSE)</code></pre>
@@ -671,28 +692,43 @@ t1 &lt;- trans_beta$new(dataset = meco_rar, group = &quot;`orig_env_material`&qu
 <pre class="r"><code>t1$cal_ordination(ordination = &quot;PCoA&quot;)
 # plot the PCoA result
 t1$plot_ordination(plot_color = &quot;`orig_env_material`&quot;, plot_shape = &quot;`orig_env_material`&quot;, plot_group_ellipse = TRUE)</code></pre>
+=======
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub3JkIDwtIG9yZGluYXRlKHBoeXNlcSwgbWV0aG9kID0gXCJQQ29BXCIsIGRpc3RhbmNlID0gXCJ3dW5pZnJhY1wiKVxuXG5wbG90X29yZGluYXRpb24ocGh5c2VxLFxuICAgICAgICAgICAgICAgIG9yZCxcbiAgICAgICAgICAgICAgICBjb2xvciA9IFwib3JpZ19lbnZfbWF0ZXJpYWxcIikrXG4gICMgRGVmaW5lIHRpdGxlIG9mIHBsb3RcbiAgbGFicyh0aXRsZSA9IFwiUENvQSAod2VpZ2h0ZWQgVW5pRnJhYylcIikgK1xuICB0aGVtZV9idygpK1xuICBzdGF0X2VsbGlwc2UodHlwZSA9IFwibm9ybVwiLCBzaXplID0gMC41KVxuYGBgIn0= -->
+<pre class="r"><code>ord &lt;- ordinate(physeq, method = &quot;PCoA&quot;, distance = &quot;wunifrac&quot;)
+
+plot_ordination(physeq,
+                ord,
+                color = &quot;orig_env_material&quot;)+
+  # Define title of plot
+  labs(title = &quot;PCoA (weighted UniFrac)&quot;) +
+  theme_bw()+
+  stat_ellipse(type = &quot;norm&quot;, size = 0.5)</code></pre>
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVjb19kYXRhJGNhbF9hYnVuZCgpXG50MSA8LSB0cmFuc19kaWZmJG5ldyhkYXRhc2V0ID0gbWVjb19kYXRhLCBtZXRob2QgPSBcInJmXCIsIGdyb3VwID0gXCJib2R5LXNpdGVcIiwgYWxwaGEgPSAwLjAxLCByZl90YXhhX2xldmVsID0gXCJQaHlsdW1cIilcbiNQcm9kdWNlIHBsb3RzIGZvciBzdHJlbmd0aCBvZiBpbmRpY2F0b3IgdmFsdWUgYW5kIHRoZSBvdGhlciBmb3IgcmVsYXRpdmUgYWJ1bmRhbmNlc1xucGxvdHMgPC0gdDEkcGxvdF9kaWZmX2FidW5kKHVzZV9udW1iZXIgPSAxOjIwLCBvbmx5X2FidW5kX3Bsb3QgPSBGQUxTRSlcbnBsb3RfZ3JpZChwbG90cyRwMSwgcGxvdHMkcDIpXG5gYGAifQ== -->
-<pre class="r"><code>meco_data$cal_abund()
-t1 &lt;- trans_diff$new(dataset = meco_data, method = &quot;rf&quot;, group = &quot;body-site&quot;, alpha = 0.01, rf_taxa_level = &quot;Phylum&quot;)
-#Produce plots for strength of indicator value and the other for relative abundances
-plots &lt;- t1$plot_diff_abund(use_number = 1:20, only_abund_plot = FALSE)
-plot_grid(plots$p1, plots$p2)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVGF4b25vbXkgPC0gcmVhZF9xemFcbmBgYCJ9 -->
+<pre class="r"><code>Taxonomy &lt;- read_qza</code></pre>
 <!-- rnb-source-end -->
+<<<<<<< HEAD
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+=======
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 0034b255d3396ba17010b853771d871a9709a97e</p>
 <!-- rnb-text-end -->
 
+<<<<<<< HEAD
 <div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamVjdCAyX1IiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyfQojIyMjIFIgU0NSSVBUIC0gSElTRUFTIERBVEFTRVQgLSBBTFBIQSBESVZFUlNJVFkgUExPVFMKCiMgTG9hZCBDUkFOIHBhY2thZ2VzCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KHZlZ2FuKQpsaWJyYXJ5KGFwZSkKCiMgTG9hZCBCaW9jb25kdWN0b3IgcGFja2FnZXMKbGlicmFyeShwaHlsb3NlcSkKCiMgTG9hZCBhZGRpdGlvbmFsIGdncGxvdCBwYWNrYWdlcwpsaWJyYXJ5KGdncGxvdDIpCmxpYnJhcnkoZ2d0aGVtZXMpCgojIERlZmluZSB0aGUgc2V0IG9mIHJhbmRvbSBudW1iZXJzCnNldC5zZWVkKDgwMCkKCiMgRGVmaW5lIG5hbWUgb2YgbWV0YWRhdGEgZmlsZQptZXRhZGF0YV9maWxlIDwtICJoaXNlYXNfbWV0YWRhdGEudHh0IgojIExvYWQgdGhlIG1ldGFkYXRhIGZpbGUKYGBgCgpgYGB7cn0KIyBMb2FkIENSQU4gcGFja2FnZXMKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodmVnYW4pCmxpYnJhcnkoYXBlKQoKIyBMb2FkIEJpb2NvbmR1Y3RvciBwYWNrYWdlcwpsaWJyYXJ5KHBoeWxvc2VxKQpsaWJyYXJ5KERFU2VxMikKYGBgCmBgYHtyfQojIENhbGN1bGF0ZSByZWxhdGl2ZSBhYnVuZGFuY2UKY2FsY3VsYXRlX3JlbGF0aXZlX2FidW5kYW5jZSA8LSBmdW5jdGlvbih4KSB4IC8gc3VtKHgpCgojIENhbGN1bGF0ZSBnZW9tZXRyaWMgbWVhbiAKY2FsY3VsYXRlX2dtX21lYW4gPC0gZnVuY3Rpb24oeCwgbmEucm0gPSBUUlVFKSB7CiAgZXhwKHN1bShsb2coeFt4ID4gMF0pLCBuYS5ybSA9IG5hLnJtKSAvIGxlbmd0aCh4KSkKfQpgYGAKCmBgYHtyIEltcG9ydCBmcm9tIFFJSU1FfQpiaW9tX2ZpbGUgPC0gaW1wb3J0X2Jpb20oInRhYmxlLXdpdGgtdGF4b25vbXkuYmlvbSIpCm1ldGFkYXRhICA8LSBpbXBvcnRfcWlpbWVfc2FtcGxlX2RhdGEoImhpc2Vhc19tZXRhZGF0YS50eHQiKQp0cmVlICAgICAgPC0gcmVhZF90cmVlX2dyZWVuZ2VuZXMoInRyZWUubndrIikKCiMgQ29udmVydCBmcm9tIG11bHRpY2hvdG9tb3VzIHRvIGRpY2hvdG1vdXMgdHJlZQp0cmVlIDwtIG11bHRpMmRpKHRyZWUpCgojIENvbWJpbmUgYWxsIGluZm9ybWF0aW9uIGludG8gYSBzaW5nbGUgcGh5bG9zZXEgb2JqZWN0CnBoeXNlcSA8LSBtZXJnZV9waHlsb3NlcShiaW9tX2ZpbGUsIG1ldGFkYXRhLCB0cmVlKQpwaHlzZXFfcmFyIDwtIHJhcmVmeV9ldmVuX2RlcHRoKHBoeXNlcSwgc2FtcGxlLnNpemUgPSAzMDAwMCkKYGBgCmBgYHtyfQpoZWFkKHNhbXBsZV9kYXRhKHBoeXNlcSkpCmBgYApgYGB7cn0KY29sbmFtZXModGF4X3RhYmxlKHBoeXNlcSkpIDwtIGMoIktpbmdkb20iLCAiUGh5bHVtIiwgIkNsYXNzIiwiT3JkZXIiLCAiRmFtaWx5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkdlbnVzIiwgIlNwZWNpZXMiKQp0YXhfdGFibGUocGh5c2VxKQpgYGAKCmBgYHtyfQp0b3RhbF9jb3VudHMgPC0gdGF4YV9zdW1zKHBoeXNlcSkKcmVsYXRpdmVfYWJ1bmRhbmNlIDwtIGNhbGN1bGF0ZV9yZWxhdGl2ZV9hYnVuZGFuY2UodG90YWxfY291bnRzKQpgYGAKCmBgYHtyfSAKYWJ1bmRhbnQgPC0gcmVsYXRpdmVfYWJ1bmRhbmNlID4gMC4wMDA1IAphYnVuZGFudF90YXhhIDwtIHBydW5lX3RheGEoYWJ1bmRhbnQsIHBoeXNlcSkKYWJ1bmRhbnRfdGF4YQpgYGAKCgpgYGB7cn0Kc3BlY2llcyA8LSB0YXhfZ2xvbShwaHlzZXEsIHRheHJhbmsgPSAiU3BlY2llcyIsIE5Bcm0gPSBGQUxTRSkKc3BlY2llcwpgYGAKCmBgYHtyfQojIFN0ZXAgMgp3b29kIDwtIHN1YnNldF9zYW1wbGVzKHBoeXNlcSwgb3JpZ19lbnZfbWF0ZXJpYWwgPT0gIndvb2QiKQojIFN0ZXAgNQp3b29kX2NvdW50cyA8LSB0YXhhX3N1bXMod29vZCkKcmVsYXRpdmVfYWJ1bmRhbmNlX3dvb2QgPC0gY2FsY3VsYXRlX3JlbGF0aXZlX2FidW5kYW5jZSh3b29kX2NvdW50cykKYWJ1bmRhbnRfd29vZCA8LSByZWxhdGl2ZV9hYnVuZGFuY2Vfd29vZCA+IDAuMDAwNQphYnVuZGFudF93b29kX3RheGEgPC0gcHJ1bmVfdGF4YShhYnVuZGFudF93b29kLCB3b29kKQojIFN0ZXAgNgphYnVuZGFudF93b29kX2dlbmVyYSA8LSB0YXhfZ2xvbShhYnVuZGFudF93b29kX3RheGEsIHRheHJhbmsgPSAiR2VudXMiKQphYnVuZGFudF93b29kX2dlbmVyYQpzYW1wbGVfZGF0YShhYnVuZGFudF93b29kX2dlbmVyYSkkb3JpZ19lbnZfbWF0ZXJpYWwgPC0KICBmYWN0b3Ioc2FtcGxlX2RhdGEoYWJ1bmRhbnRfd29vZF9nZW5lcmEpJG9yaWdfZW52X21hdGVyaWFsLAogICAgICAgICBsZXZlbHMgPSBjKCJtYXRjb250cm9sIiwgIndvb2QiKSkKYGBgCgpgYGB7cn0KZGVzZXFfcGxhc3RpYyA8LSBwaHlsb3NlcV90b19kZXNlcTIoYWJ1bmRhbnRfcGxhc3RpY19nZW5lcmEsIH4gb3JpZ19lbnZfbWF0ZXJpYWwpCmdlb19tZWFucyA8LSBhcHBseShjb3VudHMoZGVzZXFfcGxhc3RpYyksIDEsIGNhbGN1bGF0ZV9nbV9tZWFuKQpkZXNlcV9wbGFzdGljIDwtIGVzdGltYXRlU2l6ZUZhY3RvcnMoZGVzZXFfcGxhc3RpYywgZ2VvTWVhbnMgPSBnZW9fbWVhbnMpCmRlc2VxX3BsYXN0aWMgPC0gREVTZXEoZGVzZXFfcGxhc3RpYywgZml0VHlwZSA9ICJsb2NhbCIpCgpwbGFzdGljX2RpZmZfYWJ1bmQgPC0gcmVzdWx0cyhkZXNlcV9wbGFzdGljKQpgYGAKCmBgYHtyfQpvcmQgPC0gb3JkaW5hdGUocGh5c2VxLCBtZXRob2QgPSAiUENvQSIsIGRpc3RhbmNlID0gInd1bmlmcmFjIikKCnBsb3Rfb3JkaW5hdGlvbihwaHlzZXEsCiAgICAgICAgICAgICAgICBvcmQsCiAgICAgICAgICAgICAgICBjb2xvciA9ICJvcmlnX2Vudl9tYXRlcmlhbCIpKwogICMgRGVmaW5lIHRpdGxlIG9mIHBsb3QKICBsYWJzKHRpdGxlID0gIlBDb0EgKHdlaWdodGVkIFVuaUZyYWMpIikgKwogIHRoZW1lX2J3KCkrCiAgc3RhdF9lbGxpcHNlKHR5cGUgPSAibm9ybSIsIHNpemUgPSAwLjUpCgojIFJ1biBQRVJNQU5PVkEKYGBgCjw8PDw8PDwgSEVBRAoKYGBge3IgTWljcm9lY28gSW5zdGFsbH0KI0luc3RhbGwgTWljcm9lY28gQ1JBTiBwYWNrYWdlcwppbnN0YWxsLnBhY2thZ2VzKCJtaWNyb2VjbyIpCmluc3RhbGwucGFja2FnZXMoImZpbGUybWVjbyIpCmluc3RhbGwucGFja2FnZXMoInBpY2FudGUiKQppbnN0YWxsLnBhY2thZ2VzKCJHVW5pRnJhYyIpCmluc3RhbGwucGFja2FnZXMoImdnYWxsdXZpYWwiKQppbnN0YWxsLnBhY2thZ2VzKCJnZ2g0eCIpCmluc3RhbGwucGFja2FnZXMoImdncHViciIpCmluc3RhbGwucGFja2FnZXMoInJhbmRvbUZvcmVzdCIpCmluc3RhbGwucGFja2FnZXMoImlncmFwaCIpCmluc3RhbGwucGFja2FnZXMoInJnZXhmIikKaW5zdGFsbC5wYWNrYWdlcygiaHRtbHdpZGdldHMiKQpgYGAKCmBgYHtyIE1pY3JvZWNvIExvYWR9CiNMb2FkIE1pY3JvZWNvIENSQU4gUGFja2FnZXMKbGlicmFyeShoZXJlKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShtaWNyb2VjbykKbGlicmFyeShjb3dwbG90KQpsaWJyYXJ5KGZpbGUybWVjbykKbGlicmFyeShwaWNhbnRlKQpsaWJyYXJ5KEdVbmlGcmFjKQpsaWJyYXJ5KGdnYWxsdXZpYWwpCmxpYnJhcnkoZ2doNHgpCmxpYnJhcnkoZ2dwdWJyKQpsaWJyYXJ5KHJhbmRvbUZvcmVzdCkKbGlicmFyeShpZ3JhcGgpCmxpYnJhcnkocmdleGYpCmxpYnJhcnkoaHRtbHdpZGdldHMpCmBgYAoKYGBge3IgU2V0LlNlZWR9CiMjIHNldC5zZWVkIGlzIHVzZWQgdG8gZml4IHRoZSByYW5kb20gbnVtYmVyIGdlbmVyYXRpb24gdG8gbWFrZSB0aGUgcmVzdWx0cyByZXBlYXRhYmxlCnNldC5zZWVkKDgwMCkKdGhlbWVfc2V0KHRoZW1lX2J3KGJhc2Vfc2l6ZT0xOCkpCmNhbGN1bGF0ZV9yZWxhdGl2ZV9hYnVuZGFuY2UgPC0gZnVuY3Rpb24oeCkgeC9zdW0oeCkKYGBgCgpgYGB7ciBJbXBvcnQgTWljcm9lY299CiNJbXBvcnQgcXphIGFydGlmYWN0cyB0byBtaWNyb2VjbwoobWVjb19kYXRhPC1xaWltZTJtZWNvKAogICAgQVNWX2RhdGE9aGVyZTo6aGVyZSgiaGlzZWFzX3RhYmxlLnF6YSIpLAogICAgcGh5bG9fdHJlZT1oZXJlOjpoZXJlKCJoaXNlYXNfcm9vdGVkLXRyZWUucXphIiksCiAgICB0YXhvbm9teV9kYXRhPWhlcmU6OmhlcmUoImhpc2Vhc190YXhvbm9teS5xemEiKSwgCiAgICBzYW1wbGVfZGF0YSA9IGhlcmU6OmhlcmUoImhpc2Vhc19tZXRhZGF0YS50eHQiKSkpCmBgYAoKYGBge3J9CmhlYWQobWVjb19kYXRhJG90dV90YWJsZSkKbWVjb19kYXRhJHNhbXBsZV90YWJsZQpoZWFkKG1lY29fZGF0YSR0YXhfdGFibGUpCiNDcmVhdGUgYSBkdW1teSBjb3B5IG9mIG91ciBkYXRhc2V0CihkYXRhc2V0IDwtIGNsb25lKG1lY29fZGF0YSkpCmBgYAoKYGBge3J9CiNEYXRhIHByb2Nlc3NpbmcgCmRhdGFzZXQkc2FtcGxlX3N1bXMoKQojRmlsdGVyIGJ5IG1ldGFkYXRhCiNGaWx0ZXIgdGhlIHNhbXBsZXMgdG8gb25seSBpbmNsdWRlIHN1cmZhY2Ugc2FtcGxlcwpkYXRhc2V0JHNhbXBsZV90YWJsZSA8LSBkYXRhc2V0JHNhbXBsZV90YWJsZSAlPiUgZmlsdGVyKGBjb2xsZWN0aW9uX2RldmljZWAgPT0gInN3YWIiKQpkYXRhc2V0JHRpZHlfZGF0YXNldCgpCiNSYXJlZnkgZmlsdGVyZWQgZGF0YQpkYXRhc2V0JHJhcmVmeV9zYW1wbGVzKHNhbXBsZS5zaXplID0gMTAwMCkKYGBgCgpgYGB7ciBSZWxhdGl2ZSBBYnVuZGFuY2V9CiNDYWxjdWxhdGUgcmVsYXRpdmUgYWJ1bmRhbmNlCmRhdGFzZXQkY2FsX2FidW5kKHJlbD1UKQp0eXBlb2YoZGF0YXNldCR0YXhhX2FidW5kKQpuYW1lcyhkYXRhc2V0JHRheGFfYWJ1bmQpCmRhdGFzZXQkdGF4YV9hYnVuZCRDbGFzcyBbMTo1LDE6NV0KYGBgCgpgYGB7ciBSZW1vdmluZyBMb3cgQWJ1bmRhbnQgRmVhdHVyZXN9CiNSZW1vdmluZyBsb3cgYWJ1bmRhbnQgZmVhdHVyZXMKdG90YWxfY291bnRzIDwtIGRhdGFzZXQkdGF4YV9zdW1zKCkKcmVsYXRpdmVfYWJ1bmRhbmNlIDwtIGNhbGN1bGF0ZV9yZWxhdGl2ZV9hYnVuZGFuY2UodG90YWxfY291bnRzKQojZmlsdGVyIG91dCBsb3cgYWJ1bmRhbnQgZmVhdHVyZXMKYWJ1bmRhbnQgPC0gcmVsYXRpdmVfYWJ1bmRhbmNlID4gMC4wMDA1IApkYXRhc2V0JHRpZHlfZGF0YXNldCgpCmBgYAoKYGBge3IgVGF4b25vbWljIExldmVsfQojZXh0cmFjdCByZWxhdGl2ZSBhYnVuZGFuY2UgaW5mb3JtYXRpb24gb24gR2VuZXJhCmdlbmVyYV9SQSA8LSBkYXRhc2V0JHRheGFfYWJ1bmQkR2VudXMgJT4lIGFzX3RpYmJsZShyb3duYW1lcyA9ICJGZWF0dXJlX1RheG9ub215IikKCiNPbmx5IGEgc25pcHBldCBzaG93bgpoZWFkKGdlbmVyYV9SQSkKZ2VuZXJhX1JBIDwtIGdlbmVyYV9SQSAlPiUgcGl2b3RfbG9uZ2VyKC1GZWF0dXJlX1RheG9ub215LCB2YWx1ZXNfdG8gPSAiUmVsYXRpdmVfQWJ1bmRhbmNlIiwgbmFtZXNfdG8gPSAiU2FtcGxlSUQiKQoKI05vdyB3ZSBjYW4gam9pbiB0aGlzIHdpdGggdGhlIG1ldGFkYXRhIGFuZCBwbG90CmdlbmVyYV9SQSA8LSBnZW5lcmFfUkEgJT4lIGxlZnRfam9pbihkYXRhc2V0JHNhbXBsZV90YWJsZSkKCiNTcGxpdCB1cCBmZWF0dXJlIHRheG9ub215CmdlbmVyYV9SQSA8LSBnZW5lcmFfUkEgJT4lIHNlcGFyYXRlKEZlYXR1cmVfVGF4b25vbXksIGludG8gPSBjKCJrIiwicCIsImMiLCJvIiwiZiIsImciKSwgc2VwID0gIlxcfCIpCmdncGxvdChmaWx0ZXIoZ2VuZXJhX1JBLCBnID09ImdfX0Fra2VybWFuc2lhIiksIGFlcyh4PXN1YmplY3QsIHkgPSBSZWxhdGl2ZV9BYnVuZGFuY2UpKSArCiAgZ2VvbV9ib3hwbG90KCkKYGBgCgoKYGBge1IgQWJ1bmRhbmNlIFBsb3RzOiBWZW5ufQojQ3JlYXRpbmcgYSBWZW5uIERpYWdyYW0gY29tcGFyaW5nIHdvb2QgYW5kIHBsYXN0aWMKc3VyZmFjZV92ZW5uX2RhdGFzZXQ8LSBtZWNvX2RhdGEkbWVyZ2Vfc2FtcGxlcyh1c2VfZ3JvdXAgPSAib3JpZ19lbnZfbWF0ZXJpYWwiKQpzdXJmYWNlX3Zlbm5fZGF0YXNldAojIGNyZWF0ZSB0cmFuc192ZW5uIG9iamVjdAp0MSA8LSB0cmFuc192ZW5uJG5ldyhzdXJmYWNlX3Zlbm5fZGF0YXNldCwgcmF0aW8gPSAibnVtcmF0aW8iKQp0MSRwbG90X3Zlbm4oKQpgYGAKCmBgYHtyIEFidW5kYW5jZSBQbG90czogQmFycGxvdH0KdW5pcXVlKG1lY29fZGF0YSR0YXhfdGFibGUkUGh5bHVtKQojQ3JlYXRlIHRoZSB0cmFuc19hYnVuZCBvYmplY3QKdDEgPC0gdHJhbnNfYWJ1bmQkbmV3KGRhdGFzZXQgPSBtZWNvX2RhdGEsIHRheHJhbmsgPSAiUGh5bHVtIiwgbnRheGEgPSAxMCkKdDEkcGxvdF9iYXIob3RoZXJzX2NvbG9yID0gImdyZXk3MCIsIGZhY2V0ID0gImBvcmlnX2Vudl9tYXRlcmlhbGAiLCB4dGV4dF9rZWVwID0gRkFMU0UpCgojbWVhbiBhYnVuZGFuY2U/CnQxIDwtIHRyYW5zX2FidW5kJG5ldyhkYXRhc2V0ID0gbWVjb19kYXRhLCB0YXhyYW5rID0gIlBoeWx1bSIsIG50YXhhID0gMTAsIGdyb3VwbWVhbiA9ICJzdWJqZWN0IikKYGBgCgpgYGB7ciBIZWF0bWFwc30KdDEgPC0gdHJhbnNfYWJ1bmQkbmV3KGRhdGFzZXQgPSBtZWNvX2RhdGEsIHRheHJhbmsgPSAiR2VudXMiLCBudGF4YSA9IDQwKQp0MSRwbG90X2hlYXRtYXAoZmFjZXQgPSAib3JpZ19lbnZfbWF0ZXJpYWwiLCB4dGV4dF9rZWVwID0gRkFMU0UsIHdpdGhtYXJnaW4gPSBGQUxTRSkKYGBgCgpgYGB7ciBCZXRhIERpdmVyc2l0eSBBbmFseXNlczogfQptZWNvX3JhciA8LSBjbG9uZShtZWNvX2RhdGEpCm1lY29fcmFyJHJhcmVmeV9zYW1wbGVzKHNhbXBsZS5zaXplID0gMTI1MCkKbWVjb19yYXIkY2FsX2JldGFkaXYodW5pZnJhYyA9IFQpCnQxIDwtIHRyYW5zX2JldGEkbmV3KGRhdGFzZXQgPSBtZWNvX3JhciwgZ3JvdXAgPSAiYG9yaWdfZW52X21hdGVyaWFsYCIsIG1lYXN1cmUgPSAiYnJheSIpCmBgYAoKYGBge3IgT3JkaW5hdGlvbn0KdDEkY2FsX29yZGluYXRpb24ob3JkaW5hdGlvbiA9ICJQQ29BIikKIyBwbG90IHRoZSBQQ29BIHJlc3VsdAp0MSRwbG90X29yZGluYXRpb24ocGxvdF9jb2xvciA9ICJgb3JpZ19lbnZfbWF0ZXJpYWxgIiwgcGxvdF9zaGFwZSA9ICJgb3JpZ19lbnZfbWF0ZXJpYWxgIiwgcGxvdF9ncm91cF9lbGxpcHNlID0gVFJVRSkKYGBgCgpgYGB7ciBEaWZmZXJlbnRpYWwgQWJ1bmRhbmNlfQptZWNvX2RhdGEkY2FsX2FidW5kKCkKdDEgPC0gdHJhbnNfZGlmZiRuZXcoZGF0YXNldCA9IG1lY29fZGF0YSwgbWV0aG9kID0gInJmIiwgZ3JvdXAgPSAiYm9keS1zaXRlIiwgYWxwaGEgPSAwLjAxLCByZl90YXhhX2xldmVsID0gIlBoeWx1bSIpCiNQcm9kdWNlIHBsb3RzIGZvciBzdHJlbmd0aCBvZiBpbmRpY2F0b3IgdmFsdWUgYW5kIHRoZSBvdGhlciBmb3IgcmVsYXRpdmUgYWJ1bmRhbmNlcwpwbG90cyA8LSB0MSRwbG90X2RpZmZfYWJ1bmQodXNlX251bWJlciA9IDE6MjAsIG9ubHlfYWJ1bmRfcGxvdCA9IEZBTFNFKQpwbG90X2dyaWQocGxvdHMkcDEsIHBsb3RzJHAyKQpgYGAKCmBgYHtyIE5ldHdvcmsgQ29uc3RydWN0aW9ufQoKYGBgCgo9PT09PT09Cj4+Pj4+Pj4gMDAzNGIyNTVkMzM5NmJhMTcwMTBiODUzNzcxZDg3MWE5NzA5YTk3ZQo=</div>
+=======
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamVjdCAyX1IiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyfQojIyMjIFIgU0NSSVBUIC0gSElTRUFTIERBVEFTRVQgLSBBTFBIQSBESVZFUlNJVFkgUExPVFMKCiMgTG9hZCBDUkFOIHBhY2thZ2VzCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KHZlZ2FuKQpsaWJyYXJ5KGFwZSkKCiMgTG9hZCBCaW9jb25kdWN0b3IgcGFja2FnZXMKbGlicmFyeShwaHlsb3NlcSkKCiMgTG9hZCBhZGRpdGlvbmFsIGdncGxvdCBwYWNrYWdlcwpsaWJyYXJ5KGdncGxvdDIpCmxpYnJhcnkoZ2d0aGVtZXMpCgojIERlZmluZSB0aGUgc2V0IG9mIHJhbmRvbSBudW1iZXJzCnNldC5zZWVkKDgwMCkKCiMgRGVmaW5lIG5hbWUgb2YgbWV0YWRhdGEgZmlsZQptZXRhZGF0YV9maWxlIDwtICJoaXNlYXNfbWV0YWRhdGEudHh0IgojIExvYWQgdGhlIG1ldGFkYXRhIGZpbGUKYGBgCgpgYGB7cn0KIyBMb2FkIENSQU4gcGFja2FnZXMKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodmVnYW4pCmxpYnJhcnkoYXBlKQoKIyBMb2FkIEJpb2NvbmR1Y3RvciBwYWNrYWdlcwpsaWJyYXJ5KHBoeWxvc2VxKQpsaWJyYXJ5KERFU2VxMikKCiNJbnN0YWxsIHBhY2thZ2UgZnJvbSBHaXRodWIKaWYgKCFyZXF1aXJlTmFtZXNwYWNlKCJkZXZ0b29scyIsIHF1aWV0bHkgPSBUUlVFKSl7aW5zdGFsbC5wYWNrYWdlcygiZGV2dG9vbHMiKX0KZGV2dG9vbHM6Omluc3RhbGxfZ2l0aHViKCJqYmlzYW56L3FpaW1lMlIiKQpyZW1vdGVzOjppbnN0YWxsX2dpdGh1Yigidm1pa2svbWV0YWdNaXNjIikKCiNMb2FkaW5nIHNwZWNpYWwgcGFja2FnZXMKbGlicmFyeShxaWltZTJSKQpsaWJyYXJ5KG1ldGFnTWlzYykKYGBgCmBgYHtyfQojIENhbGN1bGF0ZSByZWxhdGl2ZSBhYnVuZGFuY2UKY2FsY3VsYXRlX3JlbGF0aXZlX2FidW5kYW5jZSA8LSBmdW5jdGlvbih4KSB4IC8gc3VtKHgpCgojIENhbGN1bGF0ZSBnZW9tZXRyaWMgbWVhbiAKY2FsY3VsYXRlX2dtX21lYW4gPC0gZnVuY3Rpb24oeCwgbmEucm0gPSBUUlVFKSB7CiAgZXhwKHN1bShsb2coeFt4ID4gMF0pLCBuYS5ybSA9IG5hLnJtKSAvIGxlbmd0aCh4KSkKfQpgYGAKCmBgYHtyIEltcG9ydCBmcm9tIFFJSU1FfQpiaW9tX2ZpbGUgPC0gaW1wb3J0X2Jpb20oInRhYmxlLXdpdGgtdGF4b25vbXkuYmlvbSIpCm1ldGFkYXRhICA8LSBpbXBvcnRfcWlpbWVfc2FtcGxlX2RhdGEoImhpc2Vhc19tZXRhZGF0YS50eHQiKQp0cmVlICAgICAgPC0gcmVhZF90cmVlX2dyZWVuZ2VuZXMoInRyZWUubndrIikKCiMgQ29udmVydCBmcm9tIG11bHRpY2hvdG9tb3VzIHRvIGRpY2hvdG1vdXMgdHJlZQp0cmVlIDwtIG11bHRpMmRpKHRyZWUpCgojIENvbWJpbmUgYWxsIGluZm9ybWF0aW9uIGludG8gYSBzaW5nbGUgcGh5bG9zZXEgb2JqZWN0CnBoeXNlcSA8LSBtZXJnZV9waHlsb3NlcShiaW9tX2ZpbGUsIG1ldGFkYXRhLCB0cmVlKQpwaHlzZXFfcmFyIDwtIHJhcmVmeV9ldmVuX2RlcHRoKHBoeXNlcSwgc2FtcGxlLnNpemUgPSAzMDAwMCkKYGBgCmBgYHtyfQpoZWFkKHNhbXBsZV9kYXRhKHBoeXNlcSkpCmBgYApgYGB7cn0KY29sbmFtZXModGF4X3RhYmxlKHBoeXNlcSkpIDwtIGMoIktpbmdkb20iLCAiUGh5bHVtIiwgIkNsYXNzIiwiT3JkZXIiLCAiRmFtaWx5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkdlbnVzIiwgIlNwZWNpZXMiKQp0YXhfdGFibGUocGh5c2VxKQpgYGAKCmBgYHtyfQp0b3RhbF9jb3VudHMgPC0gdGF4YV9zdW1zKHBoeXNlcSkKcmVsYXRpdmVfYWJ1bmRhbmNlIDwtIGNhbGN1bGF0ZV9yZWxhdGl2ZV9hYnVuZGFuY2UodG90YWxfY291bnRzKQpgYGAKCmBgYHtyfSAKYWJ1bmRhbnQgPC0gcmVsYXRpdmVfYWJ1bmRhbmNlID4gMC4wMDA1IAphYnVuZGFudF90YXhhIDwtIHBydW5lX3RheGEoYWJ1bmRhbnQsIHBoeXNlcSkKYWJ1bmRhbnRfdGF4YQpgYGAKCgpgYGB7cn0Kc3BlY2llcyA8LSB0YXhfZ2xvbShwaHlzZXEsIHRheHJhbmsgPSAiU3BlY2llcyIsIE5Bcm0gPSBGQUxTRSkKc3BlY2llcwpgYGAKCmBgYHtyfQojIFN0ZXAgMgp3b29kIDwtIHN1YnNldF9zYW1wbGVzKHBoeXNlcSwgb3JpZ19lbnZfbWF0ZXJpYWwgPT0gIndvb2QiKQojIFN0ZXAgNQp3b29kX2NvdW50cyA8LSB0YXhhX3N1bXMod29vZCkKcmVsYXRpdmVfYWJ1bmRhbmNlX3dvb2QgPC0gY2FsY3VsYXRlX3JlbGF0aXZlX2FidW5kYW5jZSh3b29kX2NvdW50cykKYWJ1bmRhbnRfd29vZCA8LSByZWxhdGl2ZV9hYnVuZGFuY2Vfd29vZCA+IDAuMDAwNQphYnVuZGFudF93b29kX3RheGEgPC0gcHJ1bmVfdGF4YShhYnVuZGFudF93b29kLCB3b29kKQojIFN0ZXAgNgphYnVuZGFudF93b29kX2dlbmVyYSA8LSB0YXhfZ2xvbShhYnVuZGFudF93b29kX3RheGEsIHRheHJhbmsgPSAiR2VudXMiKQphYnVuZGFudF93b29kX2dlbmVyYQpzYW1wbGVfZGF0YShhYnVuZGFudF93b29kX2dlbmVyYSkkb3JpZ19lbnZfbWF0ZXJpYWwgPC0KICBmYWN0b3Ioc2FtcGxlX2RhdGEoYWJ1bmRhbnRfd29vZF9nZW5lcmEpJG9yaWdfZW52X21hdGVyaWFsLAogICAgICAgICBsZXZlbHMgPSBjKCJtYXRjb250cm9sIiwgIndvb2QiKSkKYGBgCgpgYGB7cn0KZGVzZXFfcGxhc3RpYyA8LSBwaHlsb3NlcV90b19kZXNlcTIoYWJ1bmRhbnRfcGxhc3RpY19nZW5lcmEsIH4gb3JpZ19lbnZfbWF0ZXJpYWwpCmdlb19tZWFucyA8LSBhcHBseShjb3VudHMoZGVzZXFfcGxhc3RpYyksIDEsIGNhbGN1bGF0ZV9nbV9tZWFuKQpkZXNlcV9wbGFzdGljIDwtIGVzdGltYXRlU2l6ZUZhY3RvcnMoZGVzZXFfcGxhc3RpYywgZ2VvTWVhbnMgPSBnZW9fbWVhbnMpCmRlc2VxX3BsYXN0aWMgPC0gREVTZXEoZGVzZXFfcGxhc3RpYywgZml0VHlwZSA9ICJsb2NhbCIpCgpwbGFzdGljX2RpZmZfYWJ1bmQgPC0gcmVzdWx0cyhkZXNlcV9wbGFzdGljKQpgYGAKCmBgYHtyfQpvcmQgPC0gb3JkaW5hdGUocGh5c2VxLCBtZXRob2QgPSAiUENvQSIsIGRpc3RhbmNlID0gInd1bmlmcmFjIikKCnBsb3Rfb3JkaW5hdGlvbihwaHlzZXEsCiAgICAgICAgICAgICAgICBvcmQsCiAgICAgICAgICAgICAgICBjb2xvciA9ICJvcmlnX2Vudl9tYXRlcmlhbCIpKwogICMgRGVmaW5lIHRpdGxlIG9mIHBsb3QKICBsYWJzKHRpdGxlID0gIlBDb0EgKHdlaWdodGVkIFVuaUZyYWMpIikgKwogIHRoZW1lX2J3KCkrCiAgc3RhdF9lbGxpcHNlKHR5cGUgPSAibm9ybSIsIHNpemUgPSAwLjUpCmBgYAoKYGBge3J9ClRheG9ub215IDwtIHJlYWRfcXphCmBgYAoK</div>
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
 
 
 

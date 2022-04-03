@@ -35,6 +35,15 @@ library(ape)
 # Load Bioconductor packages
 library(phyloseq)
 library(DESeq2)
+
+#Install package from Github
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+devtools::install_github("jbisanz/qiime2R")
+remotes::install_github("vmikk/metagMisc")
+
+#Loading special packages
+library(qiime2R)
+library(metagMisc)
 ```
 ```{r}
 # Calculate relative abundance
@@ -119,69 +128,10 @@ plot_ordination(physeq,
   labs(title = "PCoA (weighted UniFrac)") +
   theme_bw()+
   stat_ellipse(type = "norm", size = 0.5)
-
-# Run PERMANOVA
 ```
+
+```{r}
 <<<<<<< HEAD
-
-```{r Microeco Install}
-#Install Microeco CRAN packages
-install.packages("microeco")
-install.packages("file2meco")
-install.packages("picante")
-install.packages("GUniFrac")
-install.packages("ggalluvial")
-install.packages("ggh4x")
-install.packages("ggpubr")
-install.packages("randomForest")
-install.packages("igraph")
-install.packages("rgexf")
-install.packages("htmlwidgets")
-```
-
-```{r Microeco Load}
-#Load Microeco CRAN Packages
-library(here)
-library(tidyverse)
-library(microeco)
-library(cowplot)
-library(file2meco)
-library(picante)
-library(GUniFrac)
-library(ggalluvial)
-library(ggh4x)
-library(ggpubr)
-library(randomForest)
-library(igraph)
-library(rgexf)
-library(htmlwidgets)
-```
-
-```{r Set.Seed}
-## set.seed is used to fix the random number generation to make the results repeatable
-set.seed(800)
-theme_set(theme_bw(base_size=18))
-calculate_relative_abundance <- function(x) x/sum(x)
-```
-
-```{r Import Microeco}
-#Import qza artifacts to microeco
-(meco_data<-qiime2meco(
-    ASV_data=here::here("hiseas_table.qza"),
-    phylo_tree=here::here("hiseas_rooted-tree.qza"),
-    taxonomy_data=here::here("hiseas_taxonomy.qza"), 
-    sample_data = here::here("hiseas_metadata.txt")))
-```
-
-```{r}
-head(meco_data$otu_table)
-meco_data$sample_table
-head(meco_data$tax_table)
-#Create a dummy copy of our dataset
-(dataset <- clone(meco_data))
-```
-
-```{r}
 #Data processing 
 dataset$sample_sums()
 #Filter by metadata
@@ -275,3 +225,8 @@ plot_grid(plots$p1, plots$p2)
 ```{r Network Construction}
 
 ```
+=======
+Taxonomy <- read_qza
+```
+
+>>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
