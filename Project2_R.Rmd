@@ -122,6 +122,7 @@ plot_ordination(physeq,
 
 # Run PERMANOVA
 ```
+<<<<<<< HEAD
 
 ```{r Microeco Install}
 #Install Microeco CRAN packages
@@ -275,3 +276,5 @@ plot_grid(plots$p1, plots$p2)
 
 ```
 
+=======
+>>>>>>> 0034b255d3396ba17010b853771d871a9709a97e
