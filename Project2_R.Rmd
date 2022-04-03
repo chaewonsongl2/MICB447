@@ -35,6 +35,15 @@ library(ape)
 # Load Bioconductor packages
 library(phyloseq)
 library(DESeq2)
+
+#Install package from Github
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+devtools::install_github("jbisanz/qiime2R")
+remotes::install_github("vmikk/metagMisc")
+
+#Loading special packages
+library(qiime2R)
+library(metagMisc)
 ```
 ```{r}
 # Calculate relative abundance
@@ -120,3 +129,8 @@ plot_ordination(physeq,
   theme_bw()+
   stat_ellipse(type = "norm", size = 0.5)
 ```
+
+```{r}
+Taxonomy <- read_qza
+```
+

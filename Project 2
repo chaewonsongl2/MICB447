@@ -109,18 +109,7 @@ qiime diversity core-metrics-phylogenetic \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --output-dir hiseas_core-metrics-results
 
-# Calculate alpha-group-significance
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results/faith_pd_vector.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results/faith-pd-group-significance.qzv
-
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity hiseas_core-metrics-results/evenness_vector.qza \
-  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
-  --o-visualization hiseas_core-metrics-results/evenness-group-significance.qzv
-
-# Calculate beta-group-significance for orig_env_material
+# Calculate beta-group-significance for orig_env_material   --->  UNWEIGHTED UNIFRAC
 qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results/unweighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
@@ -135,4 +124,17 @@ qiime diversity beta-group-significance \
   --o-visualization hiseas_core-metrics-results/unweighted-unifrac-description-group-significance.qzv \
   --p-pairwise
 
-
+# Calculate beta-group-significance for orig_env_material   --->  WEIGHTED UNIFRAC
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results/weighted_unifrac_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column orig_env_material \
+  --o-visualization hiseas_core-metrics-results/weighted-unifrac-orig_env_material-significance.qzv \
+  --p-pairwise
+  
+  qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results/weighted_unifrac_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column description \
+  --o-visualization hiseas_core-metrics-results/weighted-unifrac-description-group-significance.qzv \
+  --p-pairwise
