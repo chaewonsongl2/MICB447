@@ -1,0 +1,307 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+---
+title: "Project 2_R"
+output: html_notebook
+---
+
+```{r}
+#### R SCRIPT - HISEAS DATASET - ALPHA DIVERSITY PLOTS
+
+# Load CRAN packages
+library(tidyverse)
+library(vegan)
+library(ape)
+
+# Load Bioconductor packages
+library(phyloseq)
+
+# Load additional ggplot packages
+library(ggplot2)
+library(ggthemes)
+
+# Define the set of random numbers
+set.seed(800)
+
+# Define name of metadata file
+metadata_file <- "hiseas_metadata.txt"
+# Load the metadata file
+```
+
+```{r}
+# Load CRAN packages
+library(tidyverse)
+library(vegan)
+library(ape)
+
+# Load Bioconductor packages
+library(phyloseq)
+library(DESeq2)
+
+#Install package from Github
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+devtools::install_github("jbisanz/qiime2R")
+remotes::install_github("vmikk/metagMisc")
+
+#Loading special packages
+library(qiime2R)
+library(metagMisc)
+```
+
+
+```{r Import from QIIME}
+biom_file <- import_biom("table-with-taxonomy.biom")
+metadata  <- import_qiime_sample_data("hiseas_metadata.txt")
+tree      <- read_tree_greengenes("tree.nwk")
+
+# Convert from multichotomous to dichotmous tree
+tree <- multi2di(tree)
+
+# Combine all information into a single phyloseq object
+physeq <- merge_phyloseq(biom_file, metadata, tree)
+physeq_rar <- rarefy_even_depth(physeq, sample.size = 10000)
+```
+```{r}
+colnames(tax_table(physeq)) <- c("Kingdom", "Phylum", "Class","Order", "Family",
+                                 "Genus", "Species")
+tax_table(physeq)
+```
+```{r}
+species <- tax_glom(physeq, taxrank = "Species", NArm = FALSE)
+species
+```
+
+
+### Differential abundance analysis ###
+```{r}
+# Calculate relative abundance
+calculate_relative_abundance <- function(x) x / sum(x)
+total_counts <- taxa_sums(physeq)
+relative_abundance <- calculate_relative_abundance(total_counts)
+
+abundant <- relative_abundance > 0.0005 
+abundant_taxa <- prune_taxa(abundant, physeq)
+
+# Calculate geometric mean 
+calculate_gm_mean <- function(x, na.rm = TRUE) {
+  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
+}
+```
+
+
+```{r}
+### DESeq object creation and exploration
+# Plastic
+plastic <- subset_samples(physeq, orig_env_material == "plastic")
+
+plastic_counts <-taxa_sums(plastic)
+relative_abundance_plastic <- calculate_relative_abundance(plastic_counts)
+abundant_plastic <- relative_abundance_plastic > 0.0005
+abundant_plastic_taxa <- prune_taxa(abundant_plastic, plastic)
+
+abundant_plastic_genera <- tax_glom(abundant_plastic_taxa, taxrank = "Genus")
+abundant_plastic_genera
+
+deseq_plastic <- phyloseq_to_deseq2(abundant_plastic_genera, ~feature)
+as_tibble(colData(deseq_plastic))
+
+# Wood
+wood <- subset_samples(physeq, orig_env_material == "wood")
+
+wood_counts <-taxa_sums(wood)
+relative_abundance_wood <- calculate_relative_abundance(wood_counts)
+abundant_wood <- relative_abundance_wood > 0.0005
+abundant_wood_taxa <- prune_taxa(abundant_wood, wood)
+
+abundant_wood_genera <- tax_glom(abundant_wood_taxa, taxrank = "Genus")
+abundant_wood_genera
+
+deseq_wood <- phyloseq_to_deseq2(abundant_wood_genera, ~1)
+as_tibble(colData(deseq_wood))
+
+```
+```{r}
+deseq_plastic$feature <- relevel(deseq_plastic$feature, ref = "bed base")
+geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
+deseq_plastic <- estimateSizeFactors (deseq_plastic, geoMeans = geo_means)
+deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
+```
+
+```{r}
+### Extracting differentially abundant microbes
+resultsNames(deseq_plastic)
+```
+
+```{r}
+living_bed_diff_abund <- results(deseq_plastic, name = "feature_living.room_vs_bed.base")
+
+toilet_bed_diff_abund <- results(deseq_plastic, name = "feature_composting.toilet_vs_bed.base")
+```
+
+```{r}
+alpha <- 0.05
+(significant_living_bed <- living_bed_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+alpha <- 0.05
+(significant_toilet_bed <- toilet_bed_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_living_bed <- significant_living_bed %>% 
+  merge(genera_df, by = "row.names") %>% 
+  arrange(log2FoldChange))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_toilet_bed <- significant_toilet_bed %>% 
+  merge(genera_df, by = "row.names") %>% 
+  arrange(log2FoldChange))
+```
+
+```{r}
+ggplot(significant_toilet_bed, aes(x = log2FoldChange, y = Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Toilet vs Bed",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 18)
+
+ggplot(significant_living_bed, aes(x = log2FoldChange, y = Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Living Room vs Bed",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 18)
+```
+
+```{r}
+deseq_plastic$feature <- relevel(deseq_plastic$feature, ref = "composting toilet")
+geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
+deseq_plastic <- estimateSizeFactors (deseq_plastic, geoMeans = geo_means)
+deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
+```
+```{r}
+resultsNames(deseq_plastic)
+```
+
+
+```{r}
+toilet_bed_diff_abund <- results(deseq_plastic, name = "feature_bed.base_vs_composting.toilet")
+
+living_toilet_diff_abund <- results(deseq_plastic, name = "feature_living.room_vs_composting.toilet")
+
+alpha <- 0.05
+(significant_toilet_bed <- toilet_bed_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+alpha <- 0.05
+(significant_living_toilet <- living_toilet_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_toilet_bed <- significant_toilet_bed %>% 
+  merge(genera_df, by = "row.names") %>% 
+  arrange(log2FoldChange))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_living_toilet <- significant_living_toilet %>% 
+  merge(genera_df, by = "row.names") %>% 
+  arrange(log2FoldChange))
+```
+```{r}
+ggplot(significant_toilet_bed, aes(x = log2FoldChange, y = Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Toilet vs Bed",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 18)
+
+ggplot(significant_living_toilet, aes(x = log2FoldChange, y = Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Living Room vs Toilet",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 18)
+
+ggplot(significant_living_bed, aes(x = log2FoldChange, y = Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Living Room vs Bed",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 18)
+```
+```{r}
+library(EnhancedVolcano)
+
+EnhancedVolcano(significant_living_toilet,
+    lab=significant_living_toilet$Genus,
+    x = 'log2FoldChange',
+    y = 'pvalue') 
+
+EnhancedVolcano(significant_toilet_bed,
+    lab=significant_toilet_bed$Genus,
+    x = 'log2FoldChange',
+    y = 'pvalue') 
+
+EnhancedVolcano(significant_living_bed,
+    lab=significant_living_bed$Genus,
+    x = 'log2FoldChange',
+    y = 'pvalue') 
+
+EnhancedVolcano(significant_living_toilet,
+    lab=significant_living_toilet$Genus,
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    title = "Comparison of living room and toilet microbiomes",
+    subtitle = NULL,
+    pointSize = 6,
+    labSize = 9,
+    pCutoff = alpha,
+    legendLabSize = 10,
+    drawConnectors = T,
+    widthConnectors = 0.75,
+    colConnectors = 'black',
+    boxedLabels = T) 
+
+EnhancedVolcano(significant_toilet_bed,
+    lab=significant_toilet_bed$Genus,
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    title = "Comparison of toilet and bed microbiomes",
+    subtitle = NULL,
+    pointSize = 6,
+    labSize = 9,
+    pCutoff = alpha,
+    legendLabSize = 10,
+    drawConnectors = T,
+    widthConnectors = 0.75,
+    colConnectors = 'black',
+    boxedLabels = T) 
+
+EnhancedVolcano(significant_living_bed,
+    lab=significant_living_bed$Genus,
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    title = "Comparison of living room and bed microbiomes",
+    subtitle = NULL,
+    pointSize = 6,
+    labSize = 9,
+    pCutoff = alpha,
+    legendLabSize = 10,
+    drawConnectors = T,
+    widthConnectors = 0.75,
+    colConnectors = 'black',
+    boxedLabels = T)
+```
