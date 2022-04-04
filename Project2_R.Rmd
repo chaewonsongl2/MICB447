@@ -60,7 +60,7 @@ tree <- multi2di(tree)
 
 # Combine all information into a single phyloseq object
 physeq <- merge_phyloseq(biom_file, metadata, tree)
-physeq_rar <- rarefy_even_depth(physeq, sample.size = 30000)
+physeq_rar <- rarefy_even_depth(physeq, sample.size = 10000)
 ```
 ```{r}
 head(sample_data(physeq))
@@ -114,23 +114,31 @@ plastic_diff_abund <- results(deseq_plastic)
 ```
 
 ```{r}
-ord <- ordinate(physeq, method = "PCoA", distance = "wunifrac")
+no_water <- subset_samples(physeq, orig_env_material != "water")
+no_water_samplingequipment <- subset_samples(no_water, orig_env_material != "samplingequipment")
+
+ord <- ordinate(no_water_samplingequipment, method = "PCoA", distance = "wunifrac")
 
 plot_ordination(physeq,
                 ord,
                 color = "orig_env_material")+
   # Define title of plot
-  labs(title = "PCoA (weighted UniFrac)") +
-  theme_bw()+
+  labs(title = "PCoA (weighted UniFrac)", colour = "Surface Type") +
+  theme_classic()+
   stat_ellipse(type = "norm", size = 0.5)
 ```
 
-```{r Differential Taxonomic Analysis: Plastic}
-taxonomy <- read_qza(here::here("hiseas_taxonomy.qza"))
-phy_tree(physeq) <- multi2di(phy_tree(physeq))
-physeq@otu_table [1:5, 1:5]
-head(tax_table(physeq))
+```{r PCoA Plastic Only}
+plastic_only <- subset_samples(no_water_samplingequipment, orig_env_material != "wood")
 
-physeq_rar <- rarefy_even_depth(physeq, sample.size = 30000)
+ord <- ordinate(plastic_only, method = "PCoA", distance = "wunifrac")
+
+plot_ordination(physeq,
+                ord,
+                color = "description")+
+# Define title of plot
+  labs(title = "PCoA (weighted UniFrac)", colour = "Location") +
+  theme_classic()+
+  stat_ellipse(type = "norm", size = 0.5)
 ```
 
