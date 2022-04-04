@@ -35,6 +35,17 @@ library(ape)
 # Load Bioconductor packages
 library(phyloseq)
 library(DESeq2)
+<<<<<<< HEAD
+=======
+
+#Loading special packages
+library(qiime2R)
+library(metagMisc)
+```
+```{r}
+# Calculate relative abundance
+calculate_relative_abundance <- function(x) x / sum(x)
+>>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
 
 #Install package from Github
 if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
@@ -58,6 +69,12 @@ tree <- multi2di(tree)
 # Combine all information into a single phyloseq object
 physeq <- merge_phyloseq(biom_file, metadata, tree)
 physeq_rar <- rarefy_even_depth(physeq, sample.size = 10000)
+<<<<<<< HEAD
+=======
+```
+```{r}
+head(sample_data(physeq))
+>>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
 ```
 ```{r}
 colnames(tax_table(physeq)) <- c("Kingdom", "Phylum", "Class","Order", "Family",
@@ -126,6 +143,7 @@ deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
 ```
 
 ```{r}
+<<<<<<< HEAD
 ### Extracting differentially abundant microbes
 resultsNames(deseq_plastic)
 ```
@@ -301,10 +319,18 @@ EnhancedVolcano(significant_living_bed,
 ```{r}
 ord <- ordinate(physeq, method = "PCoA", distance = "wunifrac")
 
+=======
+no_water <- subset_samples(physeq, orig_env_material != "water")
+no_water_samplingequipment <- subset_samples(no_water, orig_env_material != "samplingequipment")
+
+ord <- ordinate(no_water_samplingequipment, method = "PCoA", distance = "wunifrac")
+
+>>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
 plot_ordination(physeq,
                 ord,
                 color = "orig_env_material")+
   # Define title of plot
+<<<<<<< HEAD
   labs(title = "PCoA (weighted UniFrac)") +
   theme_bw()+
   stat_ellipse(type = "norm", size = 0.5)
@@ -364,49 +390,32 @@ surface_venn_dataset
 # create trans_venn object
 t1 <- trans_venn$new(surface_venn_dataset, ratio = "numratio")
 t1$plot_venn()
+=======
+  labs(title = "PCoA (weighted UniFrac)", colour = "Surface Type") +
+  theme_classic()+
+  stat_ellipse(type = "norm", size = 0.5)
+>>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
 ```
 
-```{r Abundance Plots: Barplot}
-unique(meco_data$tax_table$Phylum)
-#Create the trans_abund object
-t1 <- trans_abund$new(dataset = meco_data, taxrank = "Phylum", ntaxa = 10)
-t1$plot_bar(others_color = "grey70", facet = "`orig_env_material`", xtext_keep = FALSE)
+```{r PCoA Plastic Only}
+plastic_only <- subset_samples(no_water_samplingequipment, orig_env_material != "wood")
 
-#mean abundance?
-t1 <- trans_abund$new(dataset = meco_data, taxrank = "Phylum", ntaxa = 10, groupmean = "subject")
+ord <- ordinate(plastic_only, method = "PCoA", distance = "wunifrac")
+
+plot_ordination(physeq,
+                ord,
+                color = "description")+
+# Define title of plot
+  labs(title = "PCoA (weighted UniFrac)", colour = "Location") +
+  theme_classic()+
+  stat_ellipse(type = "norm", size = 0.5)
 ```
-
-```{r Heatmaps}
-t1 <- trans_abund$new(dataset = meco_data, taxrank = "Genus", ntaxa = 40)
-t1$plot_heatmap(facet = "orig_env_material", xtext_keep = FALSE, withmargin = FALSE)
-```
-
-```{r Beta Diversity Analyses: }
-meco_rar <- clone(meco_data)
-meco_rar$rarefy_samples(sample.size = 1250)
-meco_rar$cal_betadiv(unifrac = T)
-t1 <- trans_beta$new(dataset = meco_rar, group = "`orig_env_material`", measure = "bray")
-```
-
-```{r Ordination}
-t1$cal_ordination(ordination = "PCoA")
-# plot the PCoA result
-t1$plot_ordination(plot_color = "`orig_env_material`", plot_shape = "`orig_env_material`", plot_group_ellipse = TRUE)
-```
-
-```{r Differential Abundance}
-meco_data$cal_abund()
-t1 <- trans_diff$new(dataset = meco_data, method = "rf", group = "body-site", alpha = 0.01, rf_taxa_level = "Phylum")
-#Produce plots for strength of indicator value and the other for relative abundances
-plots <- t1$plot_diff_abund(use_number = 1:20, only_abund_plot = FALSE)
-plot_grid(plots$p1, plots$p2)
-```
-
-```{r Network Construction}
-
-```
+<<<<<<< HEAD
 =======
 Taxonomy <- read_qza
 ```
 
 >>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
+=======
+
+>>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
