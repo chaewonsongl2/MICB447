@@ -410,12 +410,6 @@ plot_ordination(physeq,
   theme_classic()+
   stat_ellipse(type = "norm", size = 0.5)
 ```
-<<<<<<< HEAD
 =======
 Taxonomy <- read_qza
 ```
-
->>>>>>> 00c058ffcf90943d1797e5e700fd62d17c6deb20
-=======
-
->>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
