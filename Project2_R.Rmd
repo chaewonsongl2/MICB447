@@ -402,7 +402,7 @@ plastic_only <- subset_samples(no_water_samplingequipment, orig_env_material != 
 
 ord <- ordinate(plastic_only, method = "PCoA", distance = "wunifrac")
 
-plot_ordination(physeq,
+plot_ordination(physeq_rar,
                 ord,
                 color = "description")+
 # Define title of plot

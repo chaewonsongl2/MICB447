@@ -1,0 +1,28 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+install.packages("ggVennDiagram")
+library(ggVennDiagram)
+library(RColorBrewer)
+library(VennDiagram)
+```
+
+```{r}
+venn <- list(Living_Room = 9:274, Bed_Room = 10:275, Toilet = 8:273 )
+ggVennDiagram(venn)
+```
+
+```{r}
+grid.newpage()
+draw.triple.venn(area1 = 306, area2 = 295, area3 = 307, n12 = 275, n23 = 277, n13 = 286, n123 = 265,
+                 category = c("Bed Room", "Toilet", "Living Room"), 
+                 col ="black", fill=c("Light Blue", "orange", "pink"), 
+                 lty = "blank",
+                 cex = 1,
+                 cat.cex = 1.2,
+                 sep.dist = 0.1)
+```
+
