@@ -47,6 +47,13 @@ qiime feature-table filter-samples \
 --p-where "[collection_device]='swab'" \
 --o-filtered-table swab-filtered_hiseas_table.qza
 
+#metadata-based filtering for plastic samples
+qiime feature-table filter-samples \
+ --i-table frequency-filtered-table.qza \
+ --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt  
+ --p-where "[orig_env_material]='plastic'" \
+ --o-filtered-table plastic-filtered-hiseas_table.qza
+
 # Visualize ASVs stats
 qiime feature-table summarize \
 --i-table swab-filtered_hiseas_table.qza \
@@ -75,6 +82,13 @@ qiime taxa barplot \
   --i-taxonomy hiseas_taxonomy.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --o-visualization hiseas_taxa-bar-plots.qzv
+  
+# Plastic Samples Taxonomy barplots
+qiime taxa barplot \
+--i-table plastic-filtered-hiseas_table.qza \
+--i-taxonomy hiseas_taxonomy.qza \
+--m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+--o-visualization hiseas_plastic_taxa-bar-plots.qzv
 
 # Taxonomy-based filtering for mitochondria and chloroplast
 qiime taxa filter-table \
@@ -82,6 +96,14 @@ qiime taxa filter-table \
   --i-taxonomy hiseas_taxonomy.qza \
   --p-exclude mitochondria,chloroplast \
   --o-filtered-table hiseas_table-no-mi-ch.qza
+ 
+ # Taxonomy-based filtering for mitochondria and chloroplast; Plastic only samples
+qiime taxa filter-table \
+--i-table swab-filtered_hiseas_table.qza \
+--i-taxonomy hiseas_taxonomy.qza \
+--p-exclude mitochondria,chloroplast \
+--o-filtered-table hiseas_plastic_table-no-mi-ch.qza
+
   
  ### Diversity analyses
   
