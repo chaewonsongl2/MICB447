@@ -123,15 +123,47 @@ qiime diversity alpha-rarefaction \
 --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
 --o-visualization alpha-rarefaction.qzv
 
-# Calculate alpha- and beta-diversity metrics
+# Calculate beta-diversity metrics
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny hiseas_rooted-tree.qza \
   --i-table hiseas_table-no-mi-ch.qza \
   --p-sampling-depth 10000\
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --output-dir hiseas_core-metrics-results
+  
+# Calculate beta-group-significance for surface type  --->  BRAY CURTIS
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results/bray_curtis_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column orig_env_material \
+  --o-visualization hiseas_core-metrics-results/bray_curtis-orig_env_material-significance.qzv \
+  --p-pairwise
 
-# Calculate beta-group-significance for orig_env_material   --->  UNWEIGHTED UNIFRAC
+# Calculate beta-group-significance for location
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results/bray_curtis_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column description \
+  --o-visualization hiseas_core-metrics-results/bray_curtis-description-group-significance.qzv \
+  --p-pairwise
+
+# Calculate beta-group-significance for surface type  --->  JACCARD
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results/jaccard_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column orig_env_material \
+  --o-visualization hiseas_core-metrics-results/jaccard-orig_env_material-significance.qzv \
+  --p-pairwise
+
+# Calculate beta-group-significance for location
+qiime diversity beta-group-significance \
+  --i-distance-matrix hiseas_core-metrics-results/jaccard_distance_matrix.qza \
+  --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
+  --m-metadata-column description \
+  --o-visualization hiseas_core-metrics-results/jaccard-description-group-significance.qzv \
+  --p-pairwise
+
+# Calculate beta-group-significance for surface type  --->  UNWEIGHTED UNIFRAC
 qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results/unweighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
@@ -139,6 +171,7 @@ qiime diversity beta-group-significance \
   --o-visualization hiseas_core-metrics-results/unweighted-unifrac-orig_env_material-significance.qzv \
   --p-pairwise
 
+# Calculate beta-group-significance for location
 qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results/unweighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
@@ -146,21 +179,22 @@ qiime diversity beta-group-significance \
   --o-visualization hiseas_core-metrics-results/unweighted-unifrac-description-group-significance.qzv \
   --p-pairwise
 
-# Calculate beta-group-significance for orig_env_material   --->  WEIGHTED UNIFRAC
+# Calculate beta-group-significance for surface type   --->  WEIGHTED UNIFRAC
 qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results/weighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --m-metadata-column orig_env_material \
   --o-visualization hiseas_core-metrics-results/weighted-unifrac-orig_env_material-significance.qzv \
   --p-pairwise
-  
+ 
+# Calculate beta-group-significance for location
   qiime diversity beta-group-significance \
   --i-distance-matrix hiseas_core-metrics-results/weighted_unifrac_distance_matrix.qza \
   --m-metadata-file /mnt/datasets/project_2/hiseas/hiseas_metadata.txt \
   --m-metadata-column description \
   --o-visualization hiseas_core-metrics-results/weighted-unifrac-description-group-significance.qzv \
   --p-pairwise
-  
+ 
 # Qiime export files to R
 qiime tools export \
   --input-path hiseas_table-no-mi-ch.qza \
