@@ -325,7 +325,6 @@ no_water_samplingequipment <- subset_samples(no_water, orig_env_material != "sam
 
 ord <- ordinate(no_water_samplingequipment, method = "PCoA", distance = "wunifrac")
 
->>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
 plot_ordination(physeq,
                 ord,
                 color = "orig_env_material")+
@@ -394,7 +393,6 @@ t1$plot_venn()
   labs(title = "PCoA (weighted UniFrac)", colour = "Surface Type") +
   theme_classic()+
   stat_ellipse(type = "norm", size = 0.5)
->>>>>>> 9e94d73baae375ecf293432ae94d55d61bceddfe
 ```
 
 ```{r PCoA Plastic Only}
@@ -412,4 +410,37 @@ plot_ordination(physeq_rar,
 ```
 =======
 Taxonomy <- read_qza
+```
+
+```{r}
+#Creating Venn Diagrams - Taxonomic Analysis
+library(VennDiagram)
+```
+
+
+```{r}
+#VennDiagram of Different Genera
+grid.newpage()
+draw.triple.venn(area1 = 236, area2 = 224, area3 = 233, n12 = 214, n23 = 212, n13 = 223, n123 = 206,
+                 category = c("Bedroom", "Bathroom", "Living Room"), 
+                 col ="black", fill=c("Light Blue", "orange", "pink"), 
+                 lty = "blank",
+                 cex =2,
+                 cat.cex = 1.2,
+                 sep.dist = 0.2,
+                print.mode=c("raw","percent"))
+```
+
+
+```{r}
+#Venn Diagram of Different Species
+grid.newpage()
+draw.triple.venn(area1 = 306, area2 = 295, area3 = 307, n12 = 275, n23 = 277, n13 = 286, n123 = 265,
+                 category = c("Bedroom", "Bathroom", "Living Room"), 
+                 col ="black", fill=c("Light Blue", "orange", "pink"), 
+                 lty = "blank",
+                 cex = 1.6,
+                 cat.cex = 1.2,
+                 sep.dist = 0.1,
+                 print.mode=c("raw","percent"))
 ```
