@@ -1,0 +1,160 @@
+---
+title: "R Notebook"
+output: html_notebook
+
+```{r Loading Packages}
+# Load CRAN packages
+library(tidyverse)
+library(vegan)
+library(ape)
+
+# Load Bioconductor packages
+library(phyloseq)
+library(DESeq2)
+
+#Install package from Github
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+devtools::install_github("jbisanz/qiime2R")
+remotes::install_github("vmikk/metagMisc")
+
+#Loading special packages
+library(qiime2R)
+
+# Load additional ggplot packages
+library(ggplot2)
+library(ggthemes)
+
+```
+
+```{r Import from QIIME and Metadata Handling}
+# Define name of metadata file
+metadata_file <- "hiseas_metadata.txt"
+
+# Load the metadata file
+biom_file <- import_biom("table-with-taxonomy.biom")
+metadata  <- import_qiime_sample_data("hiseas_metadata.txt")
+tree      <- read_tree_greengenes("tree.nwk")
+
+# Convert from multichotomous to dichotmous tree
+tree <- multi2di(tree)
+
+# Combine all information into a single phyloseq object
+physeq <- merge_phyloseq(biom_file, metadata, tree)
+physeq_rar <- rarefy_even_depth(physeq, sample.size = 10000)
+
+colnames(tax_table(physeq)) <- c("Kingdom", "Phylum", "Class","Order", "Family",
+                                 "Genus", "Species")
+tax_table(physeq)
+```
+
+
+```{r Differential Abundance Analysis}
+# Calculate relative abundance
+calculate_relative_abundance <- function(x) x / sum(x)
+total_counts <- taxa_sums(physeq)
+relative_abundance <- calculate_relative_abundance(total_counts)
+
+abundant <- relative_abundance > 0.0005 
+abundant_taxa <- prune_taxa(abundant, physeq)
+
+# Calculate geometric mean 
+calculate_gm_mean <- function(x, na.rm = TRUE) {
+  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
+}
+
+# DESeq object creation and exploration
+plastic <- subset_samples(physeq, orig_env_material == "plastic")
+
+plastic_counts <-taxa_sums(plastic)
+relative_abundance_plastic <- calculate_relative_abundance(plastic_counts)
+abundant_plastic <- relative_abundance_plastic > 0.0005
+abundant_plastic_taxa <- prune_taxa(abundant_plastic, plastic)
+
+abundant_plastic_genera <- tax_glom(abundant_plastic_taxa, taxrank = "Genus")
+abundant_plastic_genera
+
+deseq_plastic <- phyloseq_to_deseq2(abundant_plastic_genera, ~feature)
+as_tibble(colData(deseq_plastic))
+
+# Use Bedroom as Reference
+deseq_plastic$feature <- relevel(deseq_plastic$feature, ref = "bed base")
+geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
+deseq_plastic <- estimateSizeFactors (deseq_plastic, geoMeans = geo_means)
+deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
+
+# Extracting differential abundant microbes
+resultsNames(deseq_plastic)
+
+# Living Room vs Bedroom
+living_bed_diff_abund <- results(deseq_plastic, name = "feature_living.room_vs_bed.base")
+
+alpha <- 0.01
+(significant_living_bed <- living_bed_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_living_bed <- significant_living_bed %>% 
+  merge(genera_df, by = "row.names") %>% 
+  arrange(log2FoldChange))
+
+
+ggplot(significant_living_bed, aes(x = log2FoldChange, y = reorder(Genus, -log2FoldChange), Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Living Room vs Bed",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 8) +
+  scale_x_continuous(labels=waiver(), limits=c(-10,25))
+
+# Use Bathroom Reference
+deseq_plastic$feature <- relevel(deseq_plastic$feature, ref = "composting toilet")
+geo_means <- apply(counts(deseq_plastic), 1, calculate_gm_mean)
+deseq_plastic <- estimateSizeFactors (deseq_plastic, geoMeans = geo_means)
+deseq_plastic <- DESeq(deseq_plastic, fitType = "local")
+
+resultsNames(deseq_plastic)
+
+# Bedroom vs Bathroom
+bed_toilet_diff_abund <- results(deseq_plastic, name = "feature_bed.base_vs_composting.toilet")
+
+alpha <- 0.01
+(significant_bed_toilet <- bed_toilet_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_bed_toilet <- significant_bed_toilet %>% 
+  merge(genera_df, by = "row.names") %>% 
+  arrange(log2FoldChange))
+
+ggplot(significant_bed_toilet, aes(x = log2FoldChange, y = reorder(Genus, -log2FoldChange), Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Bed vs Toilet",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 10) +
+  scale_x_continuous(labels=waiver(), limits=c(-10,25))
+
+# Living room vs Bathroom
+living_toilet_diff_abund <- results(deseq_plastic, name = "feature_living.room_vs_composting.toilet")
+
+alpha <- 0.01
+(significant_living_toilet <- living_toilet_diff_abund %>% 
+  as.data.frame() %>% 
+  filter(padj < alpha))
+
+genera_df <- as.data.frame(tax_table(abundant_plastic_genera))
+(significant_living_toilet <- significant_living_toilet %>% 
+  merge(genera_df, by = "row.names"))
+
+ggplot(significant_living_toilet, aes(x = log2FoldChange, y = reorder(Genus, -log2FoldChange), Genus)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Living Room vs Toilet",
+       x = expression(log[2]~fold~change),
+       y = "Genus") +
+  theme_bw(base_size = 8) +
+  scale_x_continuous(labels=waiver(), limits=c(-10,25))
+```
+
+
