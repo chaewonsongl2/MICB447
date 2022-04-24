@@ -1,4 +1,4 @@
-#HISEAS
+#Fung et al., 2022 Script 1
 
 #make detached screen of team server
 screen -S hiseas_demux
@@ -207,11 +207,6 @@ qiime tools export \
 qiime tools export \
   --input-path hiseas_rooted-tree.qza \
   --output-path exported-4
-
-sed \
->   '1 s/Feature ID/#OTUID/;1 s/Taxon/taxonomy/;1 s/Confidence/confidence/' \
->   exported-4/taxonomy.tsv \
->   > exported-4/biom-taxonomy.tsv
 
 biom add-metadata \
   -i exported-4/feature-table.biom \
